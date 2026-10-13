@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tinokekez.vercel.app/sitemap.xml

@@ -1,0 +1,10 @@
+{
+  "name": "Tino Kekez · Portfolio",
+  "short_name": "Tino Kekez",
+  "lang": "hr",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0E1116",
+  "theme_color": "#0E1116",
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml" }]
+}
