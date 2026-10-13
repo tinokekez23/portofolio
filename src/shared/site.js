@@ -37,6 +37,47 @@
     byId.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
   }
 
+  /* Header gets a hairline once the page is scrolled */
+  const bar = $(".bar");
+  if (bar) {
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => { bar.toggleAttribute("data-scrolled", scrollY > 8); ticking = false; });
+    };
+    addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+  }
+
+  /* Reveal on scroll. Only blocks that start below the fold are hidden, so the
+     first screen never blinks; the CSS decides whether anything actually moves. */
+  const reveal = $$(".sec > h2, .prose > p, .job, .two > div, .skills > div, .proj, .contact-side, .cf, .quote");
+  if (reveal.length && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const fold = innerHeight;
+    const rio = new IntersectionObserver((entries) => {
+      for (const en of entries) {
+        if (!en.isIntersecting) continue;
+        en.target.dataset.reveal = "in";
+        rio.unobserve(en.target);
+      }
+    }, { rootMargin: "0px 0px -8% 0px" });
+    const seen = new Map();
+    reveal.forEach((el) => {
+      if (el.getBoundingClientRect().top < fold) return;
+      const i = seen.get(el.parentElement) || 0;
+      seen.set(el.parentElement, i + 1);
+      el.style.setProperty("--i", Math.min(i, 4));
+      el.dataset.reveal = "";
+      rio.observe(el);
+    });
+    // Jumping to an anchor (#kontakt) must never land on invisible content.
+    addEventListener("hashchange", () => {
+      const t = location.hash && document.getElementById(location.hash.slice(1));
+      if (t) $$("[data-reveal='']", t).concat(t.matches("[data-reveal='']") ? [t] : []).forEach((el) => { el.dataset.reveal = "in"; });
+    });
+  }
+
   /* Light/dark toggle (designs that have one). theme.js has already applied the saved choice. */
   const themeBtn = $("[data-theme-toggle]");
   if (themeBtn) {

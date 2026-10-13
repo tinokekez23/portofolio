@@ -189,3 +189,65 @@ details[open] summary::before { transform: rotate(45deg); }
   body { background: #fff; font-size: 11pt; }
   .sec { break-inside: avoid; padding-block: 1.25rem; }
 }
+
+/* Motion. Everything below is decoration: with reduced motion, or without
+   JavaScript, the page looks and works exactly the same, just without movement. */
+:root { --ease: cubic-bezier(.22, .8, .24, 1); }
+.bar { transition: border-color .3s, background-color .3s; }
+.bar[data-scrolled] { border-bottom-color: var(--line); }
+.btn, .cf-send, .lang, .menu-btn { transition: background-color .2s, color .2s, border-color .2s, transform .2s var(--ease), box-shadow .2s; }
+.btn:active, .cf-send:active, .lang:active, .menu-btn:active { transform: scale(.97); }
+.cf input, .cf textarea { transition: border-color .2s, box-shadow .2s; }
+.cf input:focus-visible, .cf textarea:focus-visible { box-shadow: 0 0 0 4px var(--jade-soft); }
+.proj-shot img { transition: transform .6s var(--ease); }
+
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .25s; }
+
+  /* Hover */
+  .btn:hover, .cf-send:hover { transform: translateY(-2px); box-shadow: 0 6px 18px -8px color-mix(in srgb, var(--ink) 45%, transparent); }
+  .btn:active, .cf-send:active { transform: translateY(0) scale(.97); box-shadow: none; }
+  .proj-shot:hover img { transform: scale(1.025); }
+  .job ul li::before { transition: width .3s var(--ease); }
+  .job:hover ul li::before { width: .7rem; }
+  @media (min-width: 52.01rem) {
+    .nav a { border-bottom: 0; background: linear-gradient(var(--jade), var(--jade)) no-repeat 0 100% / 0 2px; transition: background-size .3s var(--ease), color .2s; }
+    .nav a:hover, .nav a[aria-current] { background-size: 100% 2px; }
+  }
+  summary::before { transition: transform .25s var(--ease); }
+
+  /* Smooth open/close of "how it was made" (browsers that support it) */
+  details { interpolate-size: allow-keywords; }
+  details::details-content { height: 0; overflow: clip; transition: height .35s var(--ease), content-visibility .35s allow-discrete; }
+  details[open]::details-content { height: auto; }
+
+  /* Hero on load */
+  .hero h1, .hero-actions, .hero .facts > div { animation: rise .8s var(--ease) both; }
+  .hero-actions { animation-delay: .12s; }
+  .hero .facts > div:nth-child(1) { animation-delay: .2s; }
+  .hero .facts > div:nth-child(2) { animation-delay: .26s; }
+  .hero .facts > div:nth-child(3) { animation-delay: .32s; }
+  .hero .facts > div:nth-child(4) { animation-delay: .38s; }
+  .avail-dot { animation: pulse 2.6s ease-in-out infinite; }
+
+  /* Mobile menu */
+  @media (max-width: 52rem) {
+    .nav[data-open], .nav:target { animation: drop .28s var(--ease); }
+    .menu-btn span[aria-hidden] { transition: box-shadow .2s; }
+  }
+
+  /* Sections fade in as they scroll into view. site.js marks only what starts
+     below the fold, so nothing visible on load ever blinks. */
+  [data-reveal] { opacity: 0; transform: translateY(1.5rem); transition: opacity .7s var(--ease), transform .7s var(--ease); transition-delay: calc(var(--i, 0) * 70ms); }
+  [data-reveal="in"] { opacity: 1; transform: none; }
+
+  /* Reading progress line under the header (scroll-driven, no JavaScript) */
+  @supports (animation-timeline: scroll()) {
+    .bar::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--jade); transform-origin: 0 50%; transform: scaleX(0); animation: grow linear both; animation-timeline: scroll(root); }
+  }
+}
+@keyframes rise { from { opacity: 0; transform: translateY(1.25rem); } }
+@keyframes drop { from { opacity: 0; transform: translateY(-.5rem); } }
+@keyframes grow { to { transform: scaleX(1); } }
+@keyframes pulse { 50% { box-shadow: 0 0 0 7px color-mix(in srgb, var(--jade-soft) 40%, transparent); } }
