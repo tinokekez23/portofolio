@@ -13,7 +13,7 @@ import { renderChooser } from "../src/chooser.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DIST = join(ROOT, "dist");
-const SLUGS = ["sekvencer", "otpremnica", "cetina"];
+const SLUGS = ["noc", "cetina", "sekvencer", "otpremnica"];
 
 const minifyCss = (css) =>
   css.replace(/\/\*[\s\S]*?\*\//g, "").replace(/\s*\n\s*/g, "\n").replace(/\n+/g, "\n").trim();

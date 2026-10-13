@@ -1,5 +1,5 @@
-// Which design is live at / and /en/. Options: "sekvencer", "otpremnica", "cetina".
-// All three stay viewable at /designs/.
+// Which design is live at / and /en/. Options: "noc", "cetina", "sekvencer", "otpremnica".
+// All of them stay viewable at /designs/.
 export default {
-  design: "cetina"
+  design: "noc"
 };

@@ -44,7 +44,7 @@ a:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
 </head>
 <body>
 <main>
-<h1>Tri prijedloga dizajna</h1>
+<h1>Prijedlozi dizajna</h1>
 <p class="intro">Svi koriste isti sadržaj iz <code>content/profile.mjs</code>, rade na mobitelu i računalu, imaju hrvatsku i englesku verziju te isti kontakt obrazac. Razlikuju se samo izgled i ton. Odaberi jedan; mijenja se jednim retkom u <code>site.config.mjs</code>.</p>
 <ol>
 ${designs.map(card).join("\n")}

@@ -2,7 +2,7 @@ import { esc } from "./util.mjs";
 
 // <head> shared by every design. `css` is inlined: the whole stylesheet is small,
 // so inlining saves a render-blocking request on a one-page site.
-export function head(ctx, { css, fonts = [], themeColor, themeColorDark, favicon }) {
+export function head(ctx, { css, fonts = [], themeColor, themeColorDark, favicon, extra = "" }) {
   const { P, t, lang, root, page } = ctx;
   const title = `${P.name}, ${t(P.role).charAt(0).toLowerCase()}${t(P.role).slice(1)}`;
   const desc = t(P.description);
@@ -39,7 +39,7 @@ ${themeColorDark ? `<meta name="theme-color" content="${themeColor}" media="(pre
 <link rel="icon" href="data:image/svg+xml,${encodeURIComponent(favicon)}">
 <link rel="manifest" href="${root}site.webmanifest">
 ${fonts.map((f) => `<link rel="preload" href="${root}fonts/${f}" as="font" type="font/woff2" crossorigin>`).join("\n")}
-<style>${css.replaceAll("url(fonts/", `url(${root}fonts/`)}</style>
+${extra}<style>${css.replaceAll("url(fonts/", `url(${root}fonts/`)}</style>
 <script type="application/ld+json">${JSON.stringify(person)}</script>
 </head>`;
 }

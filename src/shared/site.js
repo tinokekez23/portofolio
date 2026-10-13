@@ -37,6 +37,21 @@
     byId.forEach((_, id) => { const el = document.getElementById(id); if (el) io.observe(el); });
   }
 
+  /* Light/dark toggle (designs that have one). theme.js has already applied the saved choice. */
+  const themeBtn = $("[data-theme-toggle]");
+  if (themeBtn) {
+    const root = document.documentElement;
+    const current = () => root.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    const sync = () => themeBtn.setAttribute("aria-pressed", String(current() === "dark"));
+    themeBtn.hidden = false;
+    sync();
+    themeBtn.addEventListener("click", () => {
+      root.dataset.theme = current() === "dark" ? "light" : "dark";
+      try { localStorage.setItem("theme", root.dataset.theme); } catch { /* private mode: choice lasts this visit */ }
+      sync();
+    });
+  }
+
   /* Copy email address */
   $$("[data-copy]").forEach((btn) => {
     const label = btn.textContent;

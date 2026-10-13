@@ -6,7 +6,7 @@ Statična dvojezična stranica (HR na `/`, EN na `/en/`) koja se generira iz jed
 
 ```
 content/profile.mjs      SAV sadržaj: ime, iskustvo, vještine, projekti… (HR i EN)
-site.config.mjs          koji je dizajn aktivan na / (sekvencer, otpremnica ili cetina)
+site.config.mjs          koji je dizajn aktivan na / (noc, cetina, sekvencer ili otpremnica)
 src/designs/<dizajn>/    izgled svakog dizajna (page.mjs = HTML, style.css = stil)
 src/shared/              zajednički dijelovi: tekstovi sučelja, <head>, obrazac, site.js
 api/contact.js           Vercel funkcija za kontakt obrazac (POST /api/contact)
@@ -38,10 +38,11 @@ Uredi `content/profile.mjs`. Polja s `{ hr, en }` imaju obje verzije. Prazno pol
 
 ## Dizajni
 
-Sva tri dizajna koriste isti sadržaj i mogu se pregledati na `/designs/`. Aktivni se bira u `site.config.mjs`.
+Svi dizajni koriste isti sadržaj i mogu se pregledati na `/designs/`. Aktivni se bira u `site.config.mjs`.
 
 | Dizajn | Ideja |
 | --- | --- |
+| `noc` (aktivan) | Prvi, tamni dizajn dotjeran: ista baza i jantarna boja, bez ukrasa koji odaju AI; svijetla i tamna tema s prekidačem. |
 | `cetina` | Mirno i ozbiljno: jedno pismo, vapnenac i zelenilo Cetine, jedna jasna rečenica na vrhu. |
 | `sekvencer` | Vrh stranice je pravi bubanj-stroj sa 16 koraka (Web Audio) u bojama klasičnih ritam-mašina. |
 | `otpremnica` | Stranica kao otpremna naljepnica, s pravim Code 128 barkodom koji vodi na stranicu. |
@@ -63,3 +64,7 @@ Dok ključ nije postavljen, obrazac ne pada: posjetitelju ponudi da poruku poša
 ## Objava
 
 Projekt je spreman za Vercel: `vercel.json` pokreće `npm run build`, objavljuje `dist/`, postavlja sigurnosna zaglavlja (CSP i ostala) i dugo keširanje fontova. Funkcija u `api/` objavljuje se automatski.
+
+## Claude skillovi
+
+U `.claude/skills/` su instalirani skillovi za izradu weba (dizajn, UX, pristupačnost, SEO, brzina, testiranje, planiranje, objava na Vercel). Učitavaju se sami kad otvoriš projekt u Claude Codeu. Popis i izvori su u `skills-lock.json`; novi se dodaju naredbom `npx skills add <autor>/<repozitorij>`.
