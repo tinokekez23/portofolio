@@ -42,8 +42,8 @@ Svi dizajni koriste isti sadržaj i mogu se pregledati na `/designs/`. Aktivni s
 
 | Dizajn | Ideja |
 | --- | --- |
-| `noc` (aktivan) | Prvi, tamni dizajn dotjeran: ista baza i jantarna boja, bez ukrasa koji odaju AI; svijetla i tamna tema s prekidačem. |
-| `cetina` | Mirno i ozbiljno: jedno pismo, vapnenac i zelenilo Cetine, jedna jasna rečenica na vrhu. |
+| `noc` | Prvi, tamni dizajn dotjeran: ista baza i jantarna boja, bez ukrasa koji odaju AI; svijetla i tamna tema s prekidačem. |
+| `cetina` (aktivan) | Mirno i ozbiljno: jedno pismo, vapnenac i zelenilo Cetine, jedna jasna rečenica na vrhu. |
 | `sekvencer` | Vrh stranice je pravi bubanj-stroj sa 16 koraka (Web Audio) u bojama klasičnih ritam-mašina. |
 | `otpremnica` | Stranica kao otpremna naljepnica, s pravim Code 128 barkodom koji vodi na stranicu. |
 
