@@ -1,0 +1,61 @@
+import { fmtRange, duration, fmtDate } from "./util.mjs";
+
+// Localised, display-ready view of the profile so each design only deals with layout.
+// Strings are NOT escaped here; designs escape on output.
+export function model(ctx) {
+  const { P, t, lang, ui } = ctx;
+  return {
+    name: P.name,
+    headline: t(P.headline),
+    role: t(P.role),
+    tagline: t(P.tagline),
+    location: t(P.location),
+    study: t(P.study),
+    availability: P.available ? t(P.availability) : "",
+    email: P.email,
+    phone: P.phone,
+    photo: P.photo,
+    cv: P.cvFile,
+    socials: P.socials,
+    about: P.about.map(t),
+    jobs: P.experience.map((j) => ({
+      role: t(j.role),
+      company: t(j.company),
+      place: t(j.place),
+      start: fmtDate(j.start, lang),
+      end: j.end ? fmtDate(j.end, lang) : ui.present,
+      range: fmtRange(j.start, j.end, lang, ui),
+      duration: duration(j.start, j.end, lang),
+      current: !j.end,
+      points: j.points.map(t),
+      tags: (j.tags || []).map(t)
+    })),
+    education: P.education.map((e) => ({
+      title: t(e.title),
+      school: t(e.school),
+      range: e.end ? `${fmtDate(e.start, lang)} – ${fmtDate(e.end, lang)}` : `${ui.since} ${fmtDate(e.start, lang)}`,
+      current: !e.end,
+      note: t(e.note)
+    })),
+    certificates: P.certificates.map((c) => ({ title: t(c.title), issuer: t(c.issuer), year: c.year })),
+    skills: P.skills.map((g) => ({ group: t(g.group), items: g.items.map(t) })),
+    languages: P.languages.map((l) => ({ name: t(l.name), level: l.level === "native" ? ui.native : l.level, native: l.level === "native" })),
+    // "Hrvatski i engleski": Croatian doesn't capitalise language names mid-sentence
+    languageNames: P.languages.map((l, i) => (i && lang === "hr" ? t(l.name).toLowerCase() : t(l.name))).join(lang === "hr" ? " i " : " and "),
+    projects: P.projects.map((p) => ({
+      id: p.id,
+      title: t(p.title),
+      year: p.year,
+      planned: p.status === "planned",
+      summary: t(p.summary),
+      problem: t(p.problem),
+      solution: t(p.solution),
+      result: t(p.result),
+      stack: p.stack || [],
+      image: p.image,
+      links: (p.links || []).map((l) => ({ label: t(l.label), url: l.url }))
+    })),
+    testimonials: P.testimonials.map((q) => ({ quote: t(q.quote), name: q.name, title: t(q.title) })),
+    year: new Date().getFullYear()
+  };
+}
