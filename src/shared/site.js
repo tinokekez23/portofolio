@@ -78,6 +78,31 @@
     });
   }
 
+  /* Project clips play only while on screen, like a GIF but much lighter.
+     With reduced motion they stay paused on the poster, with normal controls. */
+  const clips = $$("video[data-autoplay]");
+  if (clips.length && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const vio = new IntersectionObserver((entries) => {
+      for (const en of entries) {
+        const v = en.target;
+        if (en.isIntersecting && !v.dataset.paused) v.play().catch(() => { v.controls = true; });
+        else v.pause();
+      }
+    }, { threshold: 0.35 });
+    clips.forEach((v) => {
+      v.controls = false;
+      v.preload = "auto";
+      // Click to pause and resume; the choice sticks while scrolling.
+      const toggle = () => {
+        if (v.paused) { delete v.dataset.paused; v.play(); } else { v.dataset.paused = "1"; v.pause(); }
+      };
+      v.tabIndex = 0;
+      v.addEventListener("click", toggle);
+      v.addEventListener("keydown", (e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); toggle(); } });
+      vio.observe(v);
+    });
+  }
+
   /* Light/dark toggle (designs that have one). theme.js has already applied the saved choice. */
   const themeBtn = $("[data-theme-toggle]");
   if (themeBtn) {

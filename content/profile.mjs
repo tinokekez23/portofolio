@@ -121,6 +121,58 @@ export default {
   // status: "done" ili "planned"
   projects: [
     {
+      id: "arthur",
+      title: { hr: "Arthur protiv goblina", en: "Arthur vs. the Goblins" },
+      year: "2026", status: "done",
+      summary: {
+        hr: "2D platformska igra iz kolegija Objektno orijentirano programiranje. Arthur skače po platformama, ruši gobline i traži izlaz kroz dva levela.",
+        en: "A 2D platformer from my Object-Oriented Programming course. Arthur jumps across platforms, knocks out goblins and makes his way through two levels."
+      },
+      problem: {
+        hr: "Zadatak je bio napraviti igru na gotovom okviru (Otter) i pritom pravilno koristiti klase i nasljeđivanje.",
+        en: "The task was to build a game on a provided framework (Otter) and make proper use of classes and inheritance."
+      },
+      solution: {
+        hr: "Napisao sam klasu Arthur, koja nasljeđuje Sprite, i klasu Goblin, koja nasljeđuje Item. Arthur ima kretanje, skok, udarac sa svojom zonom pogotka, živote i kratku neranjivost nakon što ga goblin pogodi. Goblini patroliraju između dviju točaka. Leveli su složeni u Tiled editoru.",
+        en: "I wrote an Arthur class that extends Sprite and a Goblin class that extends Item. Arthur can walk, jump and strike with his own hit area, has lives and a short invulnerability window after a hit. Goblins patrol between two points. The levels were laid out in the Tiled editor."
+      },
+      result: {
+        hr: "Igra s dva levela i tri života. Ako padneš u rupu ili izgubiš sve živote, level kreće ispočetka. Igra se na računalu: klikni Setup game pa START, strelicama se kreće i skače, a razmaknicom udara. Grafike su besplatne (CC0), od ansimuza i Kenneya.",
+        en: "A game with two levels and three lives. Fall into a pit or lose every life and the level restarts. Play it on a computer: click Setup game, then START; arrow keys move and jump, space strikes. The art is free (CC0), by ansimuz and Kenney."
+      },
+      stack: ["JavaScript", "OOP", "Canvas", "Tiled"],
+      video: {
+        src: "img/arthur", poster: "img/arthur-1200.webp", width: 800, height: 500,
+        alt: { hr: "Snimka igre: Arthur skače na platformu, udarcem ruši dva goblina i dolazi do cilja", en: "Gameplay clip: Arthur jumps onto a platform, knocks out two goblins and reaches the goal" }
+      },
+      image: { src: "img/arthur", width: 1200, height: 750, alt: { hr: "Arthur na platformi u špilji, pored goblina", en: "Arthur on a cave platform next to a goblin" } },
+      links: [{ label: { hr: "Igraj u pregledniku", en: "Play in the browser" }, url: "/projekti/arthur/" }]
+    },
+    {
+      id: "ednevnik",
+      title: { hr: "eDnevnik, model baze podataka", en: "eDnevnik, a school gradebook database" },
+      year: "2026", status: "done",
+      summary: {
+        hr: "Baza podataka za školski e-dnevnik iz kolegija Baze podataka: učenici, razredi, nastavnici, predmeti, ocjene i izostanci.",
+        en: "A database for a school gradebook, from my Databases course: students, classes, teachers, subjects, grades and absences."
+      },
+      problem: {
+        hr: "Trebalo je opisati kako škola vodi ocjene i izostanke tako da se isti podatak ne upisuje dvaput i da se u bazu ne može upisati nešto besmisleno.",
+        en: "The goal was to model how a school keeps grades and absences so that nothing is stored twice and nothing nonsensical can be entered."
+      },
+      solution: {
+        hr: "Model sam napravio u Oracle SQL Developer Data Modeleru. Tablica Nast_raz povezuje nastavnika, predmet i razred, pa svaka ocjena zna tko ju je dao i iz kojeg predmeta. Ograničenja paze na podatke: ocjena je od 1 do 5, OIB je jedinstven, a izostanak je opravdan ili nije (D/N).",
+        en: "I built the model in Oracle SQL Developer Data Modeler. The Nast_raz table links a teacher, a subject and a class, so every grade knows who gave it and for which subject. Constraints keep the data clean: grades run from 1 to 5, the personal ID number (OIB) is unique, and an absence is either excused or not (Y/N)."
+      },
+      result: {
+        hr: "Sedam tablica, osam stranih ključeva i SQL skripta za Oracle 11g sa sekvencama i okidačima koji sami dodjeljuju ID.",
+        en: "Seven tables, eight foreign keys and an Oracle 11g SQL script with sequences and triggers that assign IDs automatically."
+      },
+      stack: ["SQL", "Oracle 11g", "SQL Developer Data Modeler"],
+      image: { src: "img/ednevnik", width: 1200, height: 750, alt: { hr: "Dijagram baze eDnevnik: sedam tablica povezanih stranim ključevima", en: "eDnevnik database diagram: seven tables connected by foreign keys" } },
+      links: [{ label: { hr: "SQL skripta", en: "SQL script" }, url: "/projekti/ednevnik.sql" }]
+    },
+    {
       id: "portfolio",
       title: { hr: "Osobni portfolio", en: "Personal portfolio" },
       year: "2026", status: "done",
@@ -133,11 +185,18 @@ export default {
       links: []
     },
     {
-      id: "next",
-      title: { hr: "Sljedeći projekt", en: "Next project" },
-      year: "2026", status: "planned",
-      summary: { hr: "Ovdje dolazi moj sljedeći projekt s fakulteta ili vlastiti projekt.", en: "My next university or personal project goes here." },
-      stack: ["JavaScript"],
+      id: "daily-deals",
+      title: { hr: "Daily deals, naslovnica web trgovine", en: "Daily deals, an online shop front page" },
+      year: "2025", status: "done",
+      summary: {
+        hr: "Moj prvi rad u HTML-u i CSS-u: dio naslovnice web trgovine po uzoru na eBay, s ponudama, bannerom i podnožjem.",
+        en: "My first HTML and CSS project: part of an online shop front page modelled on eBay, with deals, a banner and a footer."
+      },
+      problem: { hr: "Cilj je bio postojeći dizajn što vjernije prenijeti u HTML i CSS.", en: "The goal was to rebuild an existing design in HTML and CSS as closely as possible." },
+      solution: { hr: "Proizvode sam složio flexboxom, dodao banner s pozadinskom slikom i gumbom te podnožje s četiri stupca linkova.", en: "I laid out the products with flexbox and added a banner with a background image and button, plus a four-column footer." },
+      result: { hr: "Danas bih ga napisao drukčije, ali tu sam počeo i vidi se koliko sam od tada naučio.", en: "I'd write it differently today, but this is where I started, and it shows how much I've learned since." },
+      stack: ["HTML", "CSS"],
+      image: { src: "img/trgovina", width: 1200, height: 750, alt: { hr: "Stranica Daily deals: šest proizvoda s cijenama i popustima", en: "Daily deals page: six products with prices and discounts" } },
       links: []
     }
   ],

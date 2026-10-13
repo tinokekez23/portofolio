@@ -53,6 +53,7 @@ export function model(ctx) {
       result: t(p.result),
       stack: p.stack || [],
       image: p.image,
+      video: p.video ? { src: p.video.src, poster: p.video.poster, width: p.video.width, height: p.video.height, alt: t(p.video.alt) } : null,
       links: (p.links || []).map((l) => ({ label: t(l.label), url: l.url }))
     })),
     testimonials: P.testimonials.map((q) => ({ quote: t(q.quote), name: q.name, title: t(q.title) })),

@@ -35,7 +35,8 @@ export function render(ctx) {
   <p>${esc(p.summary)}</p>
 </li>`
     : `<li class="proj">
-  ${p.image ? `<figure class="proj-shot">${picture(ctx, p.image, { sizes: "(min-width: 64rem) 44rem, calc(100vw - 2.5rem)" })}</figure>` : ""}
+  ${p.video ? `<figure class="proj-shot"><video poster="${root}${esc(p.video.poster)}" width="${p.video.width}" height="${p.video.height}" muted loop playsinline preload="none" controls data-autoplay aria-label="${esc(p.video.alt)}"><source src="${root}${esc(p.video.src)}.webm" type="video/webm"><source src="${root}${esc(p.video.src)}.mp4" type="video/mp4"></video></figure>`
+    : p.image ? `<figure class="proj-shot">${picture(ctx, p.image, { sizes: "(min-width: 64rem) 44rem, calc(100vw - 2.5rem)" })}</figure>` : ""}
   <div class="proj-text">
     <h3>${esc(p.title)} <span class="proj-year">${esc(p.year)}</span></h3>
     <p>${esc(p.summary)}</p>
@@ -48,7 +49,7 @@ export function render(ctx) {
         <div><dt>${ui.result}</dt><dd>${esc(p.result)}</dd></div>
       </dl>
     </details>
-    ${p.links.map((l) => `<a class="link" href="${esc(l.url)}" rel="noopener">${esc(l.label)}</a>`).join(" ")}
+    ${p.links.map((l) => `<a class="btn btn-small" href="${esc(l.url)}" rel="noopener">${esc(l.label)}</a>`).join(" ")}
   </div>
 </li>`;
 

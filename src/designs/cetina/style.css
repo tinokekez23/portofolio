@@ -132,10 +132,12 @@ a:hover { color: var(--jade); }
 /* Projects */
 .projs { display: grid; gap: 3rem; }
 .proj-shot { border-radius: 6px; overflow: hidden; border: 1px solid var(--line); background: var(--paper); margin-bottom: 1.5rem; }
+.proj-shot video { display: block; width: 100%; height: auto; background: #000; cursor: pointer; image-rendering: pixelated; }
 .proj h3 { font-size: 1.5rem; font-weight: 600; letter-spacing: -.015em; }
 .proj-year { font-weight: 400; color: var(--muted); font-size: 1.125rem; margin-left: .35rem; }
 .proj-text { display: grid; gap: .6rem; max-width: 40rem; }
 .proj-stack { color: var(--muted); font-size: 1rem; }
+.proj-text > .btn { justify-self: start; margin-top: .25rem; }
 details { margin-top: .5rem; border-top: 1px solid var(--line); }
 summary { cursor: pointer; padding: .9rem 0; font-weight: 600; color: var(--jade); list-style: none; display: flex; align-items: center; gap: .6rem; }
 summary::-webkit-details-marker { display: none; }
