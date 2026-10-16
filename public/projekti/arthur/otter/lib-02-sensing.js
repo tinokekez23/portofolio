@@ -94,7 +94,6 @@ class Sensing {
         this.keyS.getInput(down);
         break;
       default:
-        console.log(key_code);
         break;
 
     }

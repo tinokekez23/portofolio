@@ -12,7 +12,8 @@ export const meta = {
   }
 };
 
-const FAVICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#0B6B63"/><path d="M14 44c8-10 14 6 22-4s10-12 14-12" fill="none" stroke="#ECEEEA" stroke-width="5" stroke-linecap="round"/></svg>`;
+export const THEME_COLOR = "#ECEEEA";
+export const FAVICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="12" fill="#0B6B63"/><path d="M14 44c8-10 14 6 22-4s10-12 14-12" fill="none" stroke="#ECEEEA" stroke-width="5" stroke-linecap="round"/></svg>`;
 
 export function render(ctx) {
   const m = model(ctx);
@@ -54,7 +55,7 @@ export function render(ctx) {
 </li>`;
 
   return `<html lang="${lang}">
-${head(ctx, { css: ctx.css, fonts: ["schibsted.woff2"], themeColor: "#ECEEEA", themeColorDark: "#102320", favicon: FAVICON })}
+${head(ctx, { css: ctx.css, fonts: ["schibsted.woff2"], themeColor: THEME_COLOR, themeColorDark: "#102320", favicon: FAVICON })}
 <body>
 <a class="skip" href="#sadrzaj">${ui.skip}</a>
 <header class="bar">

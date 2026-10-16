@@ -36,7 +36,8 @@ const PATTERN = [
   [0, 2, 4, 6, 8, 10, 12, 14]
 ];
 
-const FAVICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="10" fill="#2B2A27"/><rect x="8" y="22" width="10" height="20" rx="2" fill="#D33A2C"/><rect x="21" y="22" width="10" height="20" rx="2" fill="#EC7A1F"/><rect x="34" y="22" width="10" height="20" rx="2" fill="#EFC032"/><rect x="47" y="22" width="10" height="20" rx="2" fill="#EFE9DA"/></svg>`;
+export const THEME_COLOR = "#E3E4E1";
+export const FAVICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="10" fill="#2B2A27"/><rect x="8" y="22" width="10" height="20" rx="2" fill="#D33A2C"/><rect x="21" y="22" width="10" height="20" rx="2" fill="#EC7A1F"/><rect x="34" y="22" width="10" height="20" rx="2" fill="#EFC032"/><rect x="47" y="22" width="10" height="20" rx="2" fill="#EFE9DA"/></svg>`;
 
 // 16 cells in four groups of four, like the coloured key blocks on the machine
 const groups = (cells) => [0, 1, 2, 3].map((g) => `<div class="grp">${cells.slice(g * 4, g * 4 + 4).join("")}</div>`).join("");
@@ -86,7 +87,7 @@ export function render(ctx) {
 </li>`;
 
   return `<html lang="${lang}">
-${head(ctx, { css: ctx.css, fonts: ["archivo.woff2"], themeColor: "#E3E4E1", themeColorDark: "#1C1B19", favicon: FAVICON })}
+${head(ctx, { css: ctx.css, fonts: ["archivo.woff2"], themeColor: THEME_COLOR, themeColorDark: "#1C1B19", favicon: FAVICON })}
 <body>
 <a class="skip" href="#sadrzaj">${ui.skip}</a>
 <header class="bar">

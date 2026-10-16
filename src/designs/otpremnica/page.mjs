@@ -21,7 +21,8 @@ const TEXT = {
   en: { from: "From", to: "To", toValue: "Your team", parcel: "Parcel 1 of 1", contactTitle: "Return slip", tear: "Fill in and send" }
 };
 
-const FAVICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="8" fill="#C7A57A"/><rect x="10" y="14" width="44" height="36" rx="3" fill="#fff" stroke="#151515" stroke-width="3"/><path d="M17 22v20M22 22v20M25 22v20M30 22v20M35 22v20M37 22v20M42 22v20M47 22v20" stroke="#151515" stroke-width="2.4"/></svg>`;
+export const THEME_COLOR = "#C7A57A";
+export const FAVICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="8" fill="#C7A57A"/><rect x="10" y="14" width="44" height="36" rx="3" fill="#fff" stroke="#151515" stroke-width="3"/><path d="M17 22v20M22 22v20M25 22v20M30 22v20M35 22v20M37 22v20M42 22v20M47 22v20" stroke="#151515" stroke-width="2.4"/></svg>`;
 
 export function render(ctx) {
   const m = model(ctx);
@@ -49,7 +50,7 @@ export function render(ctx) {
 </li>`;
 
   return `<html lang="${lang}">
-${head(ctx, { css: ctx.css, fonts: ["barlow-condensed-800.woff2", "barlow-condensed-500.woff2", "barlow-condensed-700.woff2", "barlow-400.woff2"], themeColor: "#C7A57A", favicon: FAVICON })}
+${head(ctx, { css: ctx.css, fonts: ["barlow-condensed-800.woff2", "barlow-condensed-500.woff2", "barlow-condensed-700.woff2", "barlow-400.woff2"], themeColor: THEME_COLOR, favicon: FAVICON })}
 <body>
 <a class="skip" href="#sadrzaj">${ui.skip}</a>
 <header class="bar">

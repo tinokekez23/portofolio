@@ -54,7 +54,8 @@
      first screen never blinks; the CSS decides whether anything actually moves. */
   const reveal = $$(".sec > h2, .prose > p, .job, .two > div, .skills > div, .proj, .contact-side, .cf, .quote");
   if (reveal.length && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    const fold = innerHeight;
+    // Read every position before changing anything, so the browser lays the page out once.
+    const below = reveal.filter((el) => el.getBoundingClientRect().top >= innerHeight);
     const rio = new IntersectionObserver((entries) => {
       for (const en of entries) {
         if (!en.isIntersecting) continue;
@@ -63,8 +64,7 @@
       }
     }, { rootMargin: "0px 0px -8% 0px" });
     const seen = new Map();
-    reveal.forEach((el) => {
-      if (el.getBoundingClientRect().top < fold) return;
+    below.forEach((el) => {
       const i = seen.get(el.parentElement) || 0;
       seen.set(el.parentElement, i + 1);
       el.style.setProperty("--i", Math.min(i, 4));
