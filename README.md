@@ -8,13 +8,13 @@ Statična dvojezična stranica (HR na `/`, EN na `/en/`) koja se generira iz jed
 content/profile.mjs      SAV sadržaj: ime, iskustvo, vještine, projekti… (HR i EN)
 site.config.mjs          koji je dizajn aktivan na / (noc, cetina, sekvencer ili otpremnica)
 src/designs/<dizajn>/    izgled svakog dizajna (page.mjs = HTML, style.css = stil)
-src/shared/              zajednički dijelovi: tekstovi sučelja, <head>, obrazac, site.js
+src/shared/              zajednički dijelovi: tekstovi sučelja, <head>, obrazac, 404, site.js
 api/contact.js           Vercel funkcija za kontakt obrazac (POST /api/contact)
 lib/contact.mjs          provjera unosa, zaštita od spama, slanje e-pošte (Resend)
-public/                  datoteke koje se kopiraju kakve jesu: cv.pdf, fontovi, slike
+public/                  datoteke koje se kopiraju kakve jesu: cv.pdf, fontovi, slike, igra Arthur
 scripts/build.mjs        generira dist/
 scripts/dev.mjs          lokalni server sa stranicom i API-jem
-tests/                   testovi za kontakt API
+tests/                   testovi za kontakt API i za izgrađenu stranicu (linkovi, SEO podaci)
 ```
 
 ## Naredbe
@@ -22,7 +22,7 @@ tests/                   testovi za kontakt API
 ```
 npm run dev     # izgradi i pokreni na http://localhost:3000
 npm run build   # samo izgradi u dist/
-npm test        # testovi kontakt API-ja
+npm test        # izgradi stranicu i pokreni sve testove
 ```
 
 Treba samo Node.js 20 ili noviji, nema `npm install`.
@@ -35,6 +35,7 @@ Uredi `content/profile.mjs`. Polja s `{ hr, en }` imaju obje verzije. Prazno pol
 - **GitHub / LinkedIn:** odkomentiraj retke u `socials`.
 - **Novi projekt:** dodaj objekt u `projects`. Za sliku napravi dvije WebP verzije, `ime-640.webp` i `ime-1200.webp`, i upiši `image.src: "img/ime"`.
 - **CV:** zamijeni `public/cv.pdf`.
+- **Slika za dijeljenje linka:** `public/img/share/tino-kekez-hr.jpg` i `-en.jpg` (1200 × 630). Ako promijeniš glavnu rečenicu, napravi nove slike s istim tekstom.
 
 ## Dizajni
 
@@ -63,7 +64,9 @@ Dok ključ nije postavljen, obrazac ne pada: posjetitelju ponudi da poruku poša
 
 ## Objava
 
-Projekt je spreman za Vercel: `vercel.json` pokreće `npm run build`, objavljuje `dist/`, postavlja sigurnosna zaglavlja (CSP i ostala) i dugo keširanje fontova. Funkcija u `api/` objavljuje se automatski.
+Projekt je spreman za Vercel: `vercel.json` pokreće `npm run build`, objavljuje `dist/`, postavlja sigurnosna zaglavlja (CSP i ostala) i dugo keširanje fontova i skripti (imena skripti u `dist/assets/` sadrže hash sadržaja, pa se nova verzija uvijek učita). Funkcija u `api/` objavljuje se automatski. Build sam napravi i `favicon.svg`, `site.webmanifest`, `sitemap.xml` i `404.html` za aktivni dizajn.
+
+GitHub Actions (`.github/workflows/test.yml`) pokreće `npm test` na svakom pull requestu i pushu na `main`.
 
 ## Claude skillovi
 

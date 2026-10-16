@@ -32,6 +32,11 @@ export default {
   phone: "", // upiši broj ako ga želiš javno prikazati
   photo: "", // npr. "img/tino.webp" (stavi sliku u public/img), prazno = bez fotografije
   cvFile: "cv.pdf",
+  // Slika koja se prikaže kad netko podijeli link (WhatsApp, LinkedIn…), 1200 × 630
+  shareImage: {
+    src: { hr: "img/share/tino-kekez-hr.jpg", en: "img/share/tino-kekez-en.jpg" },
+    width: 1200, height: 630
+  },
   socials: [
     // { label: "GitHub", url: "https://github.com/tvoje-ime" },
     // { label: "LinkedIn", url: "https://www.linkedin.com/in/tvoje-ime" }
@@ -142,7 +147,7 @@ export default {
       },
       stack: ["JavaScript", "OOP", "Canvas", "Tiled"],
       video: {
-        src: "img/arthur", poster: "img/arthur-1200.webp", width: 800, height: 500,
+        src: "img/arthur", poster: "img/arthur-800.webp", width: 800, height: 500,
         alt: { hr: "Snimka igre: Arthur skače na platformu, udarcem ruši dva goblina i dolazi do cilja", en: "Gameplay clip: Arthur jumps onto a platform, knocks out two goblins and reaches the goal" }
       },
       image: { src: "img/arthur", width: 1200, height: 750, alt: { hr: "Arthur na platformi u špilji, pored goblina", en: "Arthur on a cave platform next to a goblin" } },

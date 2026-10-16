@@ -18,7 +18,8 @@ const TEXT = {
   en: { theme: "Dark theme", outside: "Outside work", outsideText: "Guitar, piano and drums, kickboxing and hiking.", current: "current" }
 };
 
-const FAVICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#F2A93B"/><text x="32" y="42" font-family="Arial,sans-serif" font-weight="700" font-size="26" text-anchor="middle" fill="#14171C">TK</text></svg>`;
+export const THEME_COLOR = "#F3F4F6";
+export const FAVICON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#F2A93B"/><text x="32" y="42" font-family="Arial,sans-serif" font-weight="700" font-size="26" text-anchor="middle" fill="#14171C">TK</text></svg>`;
 
 export function render(ctx) {
   const m = model(ctx);
@@ -62,7 +63,7 @@ export function render(ctx) {
   </section>`;
 
   return `<html lang="${lang}">
-${head(ctx, { css: ctx.css, fonts: ["unbounded.woff2", "manrope.woff2"], themeColor: "#F3F4F6", themeColorDark: "#14171C", favicon: FAVICON, extra: `<script src="${root}assets/theme.js"></script>\n` })}
+${head(ctx, { css: ctx.css, fonts: ["unbounded.woff2", "manrope.woff2"], themeColor: THEME_COLOR, themeColorDark: "#14171C", favicon: FAVICON, extra: `<script src="${root}assets/${ctx.asset("theme.js")}"></script>\n` })}
 <body>
 <a class="skip" href="#sadrzaj">${ui.skip}</a>
 <header class="bar">
