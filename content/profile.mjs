@@ -111,8 +111,8 @@ export default {
   // Dozvole, sport i članstva
   certificates: [
     { title: { hr: "Vozačka dozvola B i AM", en: "Driving licence, categories B and AM" }, issuer: null, year: "" },
-    { title: { hr: "Kickboxing klub „Knez”", en: "Knez kickboxing club" }, issuer: { hr: "Četiri memorijalna turnira (point fighting, light contact)", en: "Four memorial tournaments (point fighting, light contact)" }, year: "2017–2023" },
-    { title: { hr: "MMA klub „BSK Pancration”", en: "BSK Pancration MMA club" }, issuer: { hr: "Aktivni član, Sinj", en: "Active member, Sinj" }, year: "2023–2024" }
+    { title: { hr: "Kickboxing klub „Knez”", en: "Knez kickboxing club" }, issuer: { hr: "Četiri memorijalna turnira (point fighting, light contact)", en: "Four memorial tournaments (point fighting, light contact)" }, year: "2017–2023", icon: { src: "img/kickboxing.svg", alt: { hr: "Kickboxing rukavica", en: "Kickboxing glove" } } },
+    { title: { hr: "MMA klub „BSK Pancration”", en: "BSK Pancration MMA club" }, issuer: { hr: "Aktivni član, Sinj", en: "Active member, Sinj" }, year: "2023–2024", icon: { src: "img/mma.svg", alt: { hr: "MMA oktagon", en: "MMA octagon" } } }
   ],
 
   // Vještine po skupinama, bez ocjena

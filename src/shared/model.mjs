@@ -45,7 +45,7 @@ export function model(ctx) {
       current: !e.end,
       note: t(e.note)
     })),
-    certificates: P.certificates.map((c) => ({ title: t(c.title), issuer: t(c.issuer), year: c.year })),
+    certificates: P.certificates.map((c) => ({ title: t(c.title), issuer: t(c.issuer), year: c.year, icon: c.icon ? { src: c.icon.src, alt: t(c.icon.alt) } : null })),
     skills: P.skills.map((g) => ({ group: t(g.group), items: g.items.map(t) })),
     languages: P.languages.map((l) => ({ name: t(l.name), level: l.level === "native" ? ui.native : l.level, native: l.level === "native" })),
     // "Hrvatski i engleski": Croatian doesn't capitalise language names mid-sentence
