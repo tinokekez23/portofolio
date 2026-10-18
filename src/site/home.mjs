@@ -13,8 +13,10 @@ export function renderHome(ctx) {
   const job = (j) => `<li class="job">
   <p class="job-when">${esc(j.range)}${j.duration ? `<span>${esc(j.duration)}</span>` : ""}</p>
   <div class="job-body">
-    <h3>${esc(j.role)}</h3>
-    <p class="job-org">${esc(j.company)}, ${esc(j.place)}</p>
+    <div class="job-head">
+      ${j.logo ? `<img class="job-logo" src="/${esc(j.logo.src)}" alt="${esc(j.logo.alt)}" width="56" height="56" loading="lazy">` : ""}
+      <div><h3>${esc(j.role)}</h3><p class="job-org">${esc(j.company)}, ${esc(j.place)}</p></div>
+    </div>
     ${j.points.length > 1 ? `<ul>${j.points.map((p) => `<li>${esc(p)}</li>`).join("")}</ul>` : `<p>${esc(j.points[0])}</p>`}
   </div>
 </li>`;
@@ -115,7 +117,7 @@ ${header(ctx)}
       <div class="two">
         <div>
           <h3 class="sub">${ui.education}</h3>
-          <ul class="facts-list">${m.education.map((e) => `<li><b>${esc(e.title)}</b><span>${esc(e.school)}</span><span class="meta">${esc(e.range)}${e.note ? `, ${esc(e.note.toLowerCase())}` : ""}</span></li>`).join("")}</ul>
+          <ul class="facts-list">${m.education.map((e) => `<li${e.icon ? ` class="has-icon"` : ""}>${e.icon ? `<img class="vol-icon is-logo" src="/${esc(e.icon.src)}" alt="${esc(e.icon.alt)}" width="48" height="48" loading="lazy">` : ""}<b>${esc(e.title)}</b><span>${esc(e.school)}</span><span class="meta">${esc(e.range)}${e.note ? `, ${esc(e.note.toLowerCase())}` : ""}</span></li>`).join("")}</ul>
         </div>
         <div>
           <h3 class="sub">${ui.certificates}</h3>
