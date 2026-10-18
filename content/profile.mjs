@@ -31,6 +31,7 @@ export default {
   email: "tinokekez23@gmail.com",
   phone: "", // upiši broj ako ga želiš javno prikazati
   photo: "img/tino.webp", // slika je u public/img, prazno = bez fotografije
+  photoSmall: "img/tino-mali.webp", // izrez lica za kružić u zaglavlju
   cvFile: "cv.pdf",
   // Slika koja se prikaže kad netko podijeli link (WhatsApp, LinkedIn…), 1200 × 630
   shareImage: {
