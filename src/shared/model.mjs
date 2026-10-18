@@ -48,7 +48,7 @@ export function model(ctx) {
       note: t(e.note),
       icon: e.icon ? { src: e.icon.src, alt: t(e.icon.alt), logo: !!e.icon.logo } : null
     })),
-    certificates: P.certificates.map((c) => ({ title: t(c.title), issuer: t(c.issuer), year: c.year, icon: c.icon ? { src: c.icon.src, alt: t(c.icon.alt), logo: !!c.icon.logo } : null })),
+    certificates: P.certificates.map((c) => ({ title: t(c.title), issuer: t(c.issuer), year: c.year, icon: c.icon ? { src: c.icon.src, alt: t(c.icon.alt), logo: !!c.icon.logo } : null, licences: (c.licences || []).map((l) => ({ cat: l.cat, src: l.src, alt: t(l.alt) })) })),
     skills: P.skills.map((g) => ({ group: t(g.group), items: g.items.map(t) })),
     languages: P.languages.map((l) => ({ name: t(l.name), level: l.level === "native" ? ui.native : l.level, native: l.level === "native" })),
     // "Hrvatski i engleski": Croatian doesn't capitalise language names mid-sentence

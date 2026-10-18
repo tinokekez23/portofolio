@@ -119,7 +119,12 @@ export default {
 
   // Dozvole, sport i članstva
   certificates: [
-    { title: { hr: "Vozačka dozvola B i AM", en: "Driving licence, categories B and AM" }, issuer: null, year: "" },
+    { title: { hr: "Vozačka dozvola AM, B i F", en: "Driving licence, categories AM, B and F" }, issuer: null, year: "",
+      licences: [
+        { cat: "AM", src: "img/dozvola-am.webp", alt: { hr: "moped", en: "moped" } },
+        { cat: "B", src: "img/dozvola-b.webp", alt: { hr: "osobni automobil", en: "car" } },
+        { cat: "F", src: "img/dozvola-f.webp", alt: { hr: "traktor", en: "tractor" } }
+      ] },
     { title: { hr: "Kickboxing klub „Knez”", en: "Knez kickboxing club" }, issuer: { hr: "Četiri memorijalna turnira (point fighting, light contact)", en: "Four memorial tournaments (point fighting, light contact)" }, year: "2017–2023", icon: { src: "img/kbk-knez.webp", alt: { hr: "Logo kickboxing kluba Knez", en: "Knez kickboxing club logo" }, logo: true } },
     { title: { hr: "MMA klub „BSK Pancration”", en: "BSK Pancration MMA club" }, issuer: { hr: "Aktivni član, Sinj", en: "Active member, Sinj" }, year: "2023–2024", icon: { src: "img/bsk-pancration.webp", alt: { hr: "Logo borilačkog kluba Pancration", en: "Pancration combat sports club logo" }, logo: true } }
   ],
