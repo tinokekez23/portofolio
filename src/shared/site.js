@@ -23,17 +23,32 @@
     });
   }
 
-  /* Header photo: opens larger in a dialog; without JS the link opens the image itself. */
-  const photo = $("[data-photo]");
-  if (photo && window.HTMLDialogElement) {
+  /* Photos (header circle, guitar photo) open larger in a dialog; without JS the
+     link opens the image itself. Closing fades out before the dialog goes away. */
+  const photos = $$("[data-photo]");
+  if (photos.length && window.HTMLDialogElement) {
     const dlg = document.createElement("dialog");
     dlg.className = "photo-dlg";
-    dlg.setAttribute("aria-label", $("img", photo).alt);
     const close = document.documentElement.lang === "en" ? "Close" : "Zatvori";
-    dlg.innerHTML = `<img src="${photo.getAttribute("href")}" alt="" width="400" height="500"><button type="button">${close}</button>`;
+    dlg.innerHTML = `<img src="" alt=""><button type="button">${close}</button>`;
     document.body.append(dlg);
-    photo.addEventListener("click", (e) => { e.preventDefault(); dlg.showModal(); });
-    dlg.addEventListener("click", (e) => { if (e.target === dlg || e.target.closest("button")) dlg.close(); });
+    const big = $("img", dlg);
+    const still = matchMedia("(prefers-reduced-motion: reduce)");
+    photos.forEach((a) => a.addEventListener("click", (e) => {
+      e.preventDefault();
+      const img = $("img", a);
+      big.src = a.getAttribute("href");
+      dlg.setAttribute("aria-label", img.alt);
+      dlg.classList.toggle("is-wide", a.dataset.photo === "wide");
+      dlg.classList.remove("is-closing");
+      dlg.showModal();
+    }));
+    const shut = () => {
+      if (still.matches) return dlg.close();
+      dlg.classList.add("is-closing");
+      setTimeout(() => { dlg.close(); dlg.classList.remove("is-closing"); }, 220);
+    };
+    dlg.addEventListener("click", (e) => { if (e.target === dlg || e.target.closest("button")) shut(); });
   }
 
   /* Current section in the navigation */
@@ -65,7 +80,7 @@
 
   /* Reveal on scroll. Only blocks that start below the fold are hidden, so the
      first screen never blinks; the CSS decides whether anything actually moves. */
-  const reveal = $$(".sec > h2, .prose > p, .job, .vol, .two > div, .skills > div, .proj, .contact-side, .cf, .quote, .case-body > section");
+  const reveal = $$(".sec > h2, .prose > p, .about-photo, .job, .vol, .two > div, .facts-list > li, .skills > div, .proj, .contact-side, .cf, .quote, .case-body > section");
   if (reveal.length && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
     // Read every position before changing anything, so the browser lays the page out once.
     const below = reveal.filter((el) => el.getBoundingClientRect().top >= innerHeight);
