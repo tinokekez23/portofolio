@@ -38,4 +38,4 @@ createServer(async (req, res) => {
     res.writeHead(404, { ...HEADERS, "Content-Type": TYPES[".html"] });
     res.end(await readFile(join(DIST, "404.html")).catch(() => "404"));
   }
-}).listen(PORT, () => console.log(`http://localhost:${PORT}  (designs: /designs/)`));
+}).listen(PORT, () => console.log(`http://localhost:${PORT}`));

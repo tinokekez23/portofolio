@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="hr">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Arthur protiv goblina, igra u pregledniku · Tino Kekez</title>
+  <meta name="description" content="Igraj Arthur protiv goblina, 2D platformsku igru u JavaScriptu iz kolegija Objektno orijentirano programiranje. Radi u pregledniku na računalu.">
+  <link rel="canonical" href="https://tinokekez.vercel.app/projekti/arthur/igra/">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/schibsted.woff2" as="font" type="font/woff2" crossorigin>
+  <link href="otter.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+
+  <main>
+  <div id="divIzbornik">
+    <header class="vrh">
+      <a class="znak" href="/">Tino Kekez</a>
+      <h1>Arthur protiv goblina</h1>
+      <a class="o-projektu" href="/projekti/arthur/">O projektu</a>
+    </header>
+    <p class="upute">Klikni <b>Setup game</b>, pa <b>START</b>. Strelice: kretanje i skok. Razmaknica: udarac.</p>
+
+    <div class="gumbi">
+      <button type="button" id="btnMaps"><span class="emoji" aria-hidden="true">&#127757;</span> Maps</button>
+      <button type="button" class="orange" id="btnSetupGame"><span class="emoji" aria-hidden="true">&#128736;</span> Setup game #</button>
+      <button type="button" class="green" id="btnStart"><span class="emoji" aria-hidden="true">&#127937;</span> START</button>
+      <button type="button" class="red" id="btnStop"><span class="emoji" aria-hidden="true">&#10060;</span> STOP</button>
+    </div>
+  </div>
+
+  <canvas id="game" aria-label="Igra Arthur protiv goblina"></canvas>
+
+  <!-- Info -->
+  <div class="infowrapper">
+    <p class="info"><label><input type="checkbox" name="showOutput" id="showOutput"> Output info</label></p>
+    <textarea id="taInfo" class="info" rows="4" disabled hidden aria-label="Output info"></textarea>
+  </div>
+  </main>
+
+  <!-- postavke -->
+
+  <script src="otter/lib-00-GameSettings.js"></script>
+
+  <!-- mape -->
+
+  <script src="maps/v10/level1.js"></script>
+  <script src="maps/v10/level2.js"></script>
+
+  <!-- okvir -->
+
+  <script src="otter/lib-01-tiled.js"></script>
+  <script src="otter/lib-02-sensing.js"></script>
+  <script src="otter/lib-03-display.js"></script>
+  <script src="otter/lib-04-engine.js"></script>
+  <script src="otter/lib-05-game.js"></script>
+  <script src="otter/lib-06-main.js"></script>
+
+  <!-- vlastiti kod -->
+  <script src="jsKod/kod_00-staticka.js"></script>
+  <script src="jsKod/kod_01-likovi.js"></script>
+  <script src="jsKod/kod_02-postavke.js"></script>
+  <script src="jsKod/kod_03-logikaIgre.js"></script>
+
+</body>
+
+</html>
