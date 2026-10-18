@@ -144,6 +144,11 @@ a:hover { color: var(--jade); }
 .facts-list .has-icon .vol-icon { grid-row: 1 / span 3; }
 .vol-icon.is-logo { width: 4rem; height: 4rem; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; object-fit: contain; filter: drop-shadow(0 2px 4px rgb(0 0 0 / .15)); }
 .facts-list .has-icon > :not(img) { grid-column: 2; }
+.lic { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: .6rem; }
+.lic li { display: grid; justify-items: center; gap: .3rem; width: 4.5rem; padding: .6rem .4rem .45rem; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); }
+.lic img { width: 2.75rem; height: 2.75rem; object-fit: contain; }
+.lic span { font-weight: 600; font-size: .9rem; line-height: 1; color: var(--jade); }
+@media (prefers-color-scheme: dark) { .lic img { filter: invert(1) brightness(1.6) hue-rotate(180deg); } }
 
 /* Skills */
 .skills { display: grid; gap: 0; }
@@ -306,6 +311,10 @@ a:hover { color: var(--jade); }
 
   /* Club logos and icons settle in with a small pop */
   .facts-list .vol-icon, .vol .vol-icon, .job-logo { transition: transform .5s var(--ease), filter .3s; }
+  .lic li { transition: transform .35s var(--ease), border-color .25s, box-shadow .35s var(--ease); }
+  .lic img { transition: transform .5s var(--ease); }
+  .lic li:hover { transform: translateY(-3px); border-color: var(--jade); box-shadow: 0 8px 18px -10px color-mix(in srgb, var(--ink) 50%, transparent); }
+  .lic li:hover img { transform: translateX(4px) scale(1.06); }
   .facts-list li:hover .vol-icon, .vol:hover .vol-icon, .job:hover .job-logo { transform: scale(1.08) rotate(-3deg); }
 
   /* Reading progress line under the header (scroll-driven, no JavaScript) */

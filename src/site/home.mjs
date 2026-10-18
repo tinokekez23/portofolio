@@ -121,7 +121,7 @@ ${header(ctx)}
         </div>
         <div>
           <h3 class="sub">${ui.certificates}</h3>
-          <ul class="facts-list">${m.certificates.map((c) => `<li${c.icon ? ` class="has-icon"` : ""}>${c.icon ? `<img class="vol-icon${c.icon.logo ? " is-logo" : ""}" src="/${esc(c.icon.src)}" alt="${esc(c.icon.alt)}" width="48" height="48" loading="lazy">` : ""}<b>${esc(c.title)}</b>${c.issuer ? `<span>${esc(c.issuer)}</span>` : ""}${c.year ? `<span class="meta">${esc(c.year)}</span>` : ""}</li>`).join("")}</ul>
+          <ul class="facts-list">${m.certificates.map((c) => `<li${c.icon ? ` class="has-icon"` : ""}>${c.icon ? `<img class="vol-icon${c.icon.logo ? " is-logo" : ""}" src="/${esc(c.icon.src)}" alt="${esc(c.icon.alt)}" width="48" height="48" loading="lazy">` : ""}<b>${esc(c.title)}</b>${c.licences.length ? `<ul class="lic">${c.licences.map((l) => `<li><img src="/${esc(l.src)}" alt="${esc(l.alt)}" width="48" height="48" loading="lazy"><span>${esc(l.cat)}</span></li>`).join("")}</ul>` : ""}${c.issuer ? `<span>${esc(c.issuer)}</span>` : ""}${c.year ? `<span class="meta">${esc(c.year)}</span>` : ""}</li>`).join("")}</ul>
         </div>
       </div>
     </div>
