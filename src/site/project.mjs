@@ -52,13 +52,7 @@ ${head(ctx, { title, description, path, css: ctx.css, jsonld, themeColor: THEME_
 ${header(ctx, { home, path })}
 
 <main id="sadrzaj" class="case wrap">
-  <nav class="crumbs" aria-label="Breadcrumb">
-    <ol>
-      <li><a href="${home}">${ui.home}</a></li>
-      <li><a href="${home}#projekti">${ui.projects}</a></li>
-      <li aria-current="page">${esc(p.title)}</li>
-    </ol>
-  </nav>
+  <p class="case-back"><a class="back-link" href="${home}#projekti"><span aria-hidden="true">←</span> ${ui.backToProjects}</a></p>
 
   <header class="case-head" id="top">
     <p class="case-kicker">${ui.projectOf} · ${esc(p.year)}</p>
@@ -89,7 +83,7 @@ ${header(ctx, { home, path })}
   </div>
 
   <nav class="case-next" aria-label="${ui.projects}">
-    <a href="${home}#projekti">${ui.allProjects}</a>
+    <a class="back-link" href="${home}#projekti"><span aria-hidden="true">←</span> ${ui.allProjects}</a>
     ${next ? `<a class="case-next-link" href="${home}projekti/${next.id}/"><span>${ui.nextProject}</span>${esc(next.title)}</a>` : ""}
   </nav>
 </main>
