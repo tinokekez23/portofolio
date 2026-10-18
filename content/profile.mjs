@@ -11,23 +11,23 @@ export default {
 
   // Glavna rečenica na vrhu stranice; ime se dodaje ispred nje
   headline: {
-    hr: "studira informatiku u Splitu, uči web development i traži studentski posao ili praksu.",
-    en: "studies computer science in Split, is learning web development and is looking for a student job or internship."
+    hr: "studira informatiku u Splitu, izrađuje web stranice i traži studentski posao ili stručnu praksu.",
+    en: "studies computer science in Split, builds websites and is looking for a student job or internship."
   },
-  role: { hr: "Student informatike koji uči web development", en: "Computer science student learning web development" },
+  role: { hr: "Student informatike, front-end web development", en: "Computer science student, front-end web development" },
   // Kratki opis za tražilice i dijeljenje linka
   description: {
     hr: "Tino Kekez, student treće godine informatike na PMF-u u Splitu. Životopis, iskustvo, vještine i projekti.",
     en: "Tino Kekez, third-year computer science student in Split, Croatia. CV, experience, skills and projects."
   },
   tagline: {
-    hr: "Student sam treće godine informatike na PMF-u u Splitu. Učim izrađivati web stranice i tražim studentski posao ili praksu u IT-u.",
-    en: "I'm a third-year computer science student in Split. I'm learning to build websites and looking for a student job or internship in IT."
+    hr: "Student sam treće godine informatike na PMF-u u Splitu. Izrađujem web stranice u HTML-u, CSS-u i JavaScriptu i tražim studentski posao ili stručnu praksu u IT-u.",
+    en: "I'm a third-year computer science student in Split. I build websites with HTML, CSS and JavaScript and I'm looking for a student job or internship in IT."
   },
   study: { hr: "Informatika, PMF Split", en: "Computer Science, University of Split" },
   location: { hr: "Sinj i Split, Hrvatska", en: "Sinj and Split, Croatia" },
   available: true,
-  availability: { hr: "Slobodan za studentski posao i praksu", en: "Available for student work and internships" },
+  availability: { hr: "Dostupan za studentski posao i stručnu praksu", en: "Available for student work and internships" },
   email: "tinokekez23@gmail.com",
   phone: "", // upiši broj ako ga želiš javno prikazati
   photo: "img/tino.webp", // slika je u public/img, prazno = bez fotografije
@@ -45,12 +45,12 @@ export default {
 
   about: [
     {
-      hr: "Student sam treće godine informatike na Prirodoslovno-matematičkom fakultetu u Splitu. Trenutno učim web development: HTML, CSS i JavaScript, a ova stranica je moj prvi veći projekt.",
-      en: "I'm a third-year computer science student at the Faculty of Science in Split. I'm currently learning web development: HTML, CSS and JavaScript, and this site is my first bigger project."
+      hr: "Student sam treće godine prijediplomskog studija informatike na Prirodoslovno-matematičkom fakultetu u Splitu. Usmjeren sam na front-end web development (HTML, CSS i JavaScript), a ova je stranica moj prvi veći web projekt.",
+      en: "I'm a third-year undergraduate in computer science at the Faculty of Science in Split. My focus is front-end web development with HTML, CSS and JavaScript, and this site is my first larger web project."
     },
     {
-      hr: "Radio sam u skladištu, volontirao i godinama trenirao borilačke sportove, pa znam raditi u timu, držati se dogovora i učiti brzo. U slobodno vrijeme sviram gitaru, klavir i bubnjeve te planinarim.",
-      en: "I've worked in a warehouse, volunteered and trained combat sports for years, so I know how to work in a team, keep my word and learn fast. In my free time I play guitar, piano and drums, and go hiking."
+      hr: "Radio sam u skladištu HNK Hajduk Split, volontirao s djecom s posebnim potrebama i sedam godina trenirao borilačke sportove. Ta su me iskustva naučila odgovornosti, radu u timu i tome da započeti posao dovedem do kraja. U slobodno vrijeme sviram gitaru, klavir i bubnjeve te planinarim.",
+      en: "I've worked in the HNK Hajduk Split warehouse, volunteered with children with special needs and trained combat sports for seven years. Those experiences taught me responsibility, teamwork and how to see a job through to the end. In my free time I play guitar, piano and drums, and go hiking."
     }
   ],
 
@@ -93,8 +93,8 @@ export default {
       place: { hr: "Sinj", en: "Sinj" },
       start: "2023-04", end: "2023-04",
       points: [
-        { hr: "Kroz sviranje radio s djecom s posebnim potrebama i pomagao u svakodnevnim aktivnostima.", en: "Worked with children with special needs through music and helped with daily activities." },
-        { hr: "Naučio strpljivo i jasno komunicirati.", en: "Learned to communicate patiently and clearly." }
+        { hr: "Kroz glazbu radio s djecom s posebnim potrebama i pomagao im u svakodnevnim aktivnostima.", en: "Worked with children with special needs through music and helped them with daily activities." },
+        { hr: "Razvio strpljivu i jasnu komunikaciju.", en: "Developed patient, clear communication." }
       ],
       icon: { src: "img/glazbene-radionice.svg", alt: { hr: "Glazbene note", en: "Music notes" } }
     }
@@ -128,7 +128,7 @@ export default {
   skills: [
     { group: { hr: "Učim i koristim", en: "Learning and using" }, items: ["HTML", "CSS", "JavaScript", "Git i GitHub"] },
     { group: { hr: "Sa studija", en: "From university" }, items: [{ hr: "Osnove programiranja", en: "Programming basics" }, { hr: "Baze podataka i SQL", en: "Databases and SQL" }] },
-    { group: { hr: "Pouzdano znam", en: "Confident with" }, items: ["Word, Excel, PowerPoint", { hr: "Evidencija i logistika", en: "Records and logistics" }] }
+    { group: { hr: "Pouzdano koristim", en: "Confident with" }, items: ["Word, Excel, PowerPoint", { hr: "Evidencija i logistika", en: "Records and logistics" }] }
   ],
   // CEFR razine: A1, A2, B1, B2, C1, C2 ili "native"
   languages: [
