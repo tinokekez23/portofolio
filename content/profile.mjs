@@ -64,6 +64,7 @@ export default {
     {
       role: { hr: "Skladišni radnik, sortiranje i otprema robe", en: "Warehouse worker, sorting and dispatch" },
       company: "HNK Hajduk Split",
+      logo: { src: "img/hajduk.webp", alt: { hr: "Grb HNK Hajduk Split", en: "HNK Hajduk Split crest" } },
       place: { hr: "Split", en: "Split" },
       start: "2023-05", end: "2023-08",
       points: [
@@ -104,13 +105,15 @@ export default {
       title: { hr: "Prijediplomski studij informatike", en: "BSc in Computer Science (in progress)" },
       school: { hr: "Prirodoslovno-matematički fakultet, Split", en: "Faculty of Science, University of Split" },
       start: "2024", end: null,
-      note: { hr: "Treća godina.", en: "Third year." }
+      note: { hr: "Treća godina.", en: "Third year." },
+      icon: { src: "img/pmf.webp", alt: { hr: "Logo PMF-a Split", en: "Faculty of Science Split logo" }, logo: true }
     },
     {
       title: { hr: "Komercijalist", en: "Commercial clerk (vocational)" },
       school: { hr: "Srednja strukovna škola bana Josipa Jelačića, Sinj", en: "Ban Josip Jelačić Vocational School, Sinj" },
       start: "2019", end: "2024",
-      note: null
+      note: null,
+      icon: { src: "img/ss-jelacic.webp", alt: { hr: "Logo Srednje strukovne škole bana Josipa Jelačića", en: "Ban Josip Jelačić Vocational School logo" }, logo: true }
     }
   ],
 

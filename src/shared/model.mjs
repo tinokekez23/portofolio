@@ -29,7 +29,8 @@ export function model(ctx) {
       duration: duration(j.start, j.end, lang),
       current: !j.end,
       points: j.points.map(t),
-      tags: (j.tags || []).map(t)
+      tags: (j.tags || []).map(t),
+      logo: j.logo ? { src: j.logo.src, alt: t(j.logo.alt) } : null
     })),
     volunteering: P.volunteering.map((v) => ({
       role: t(v.role),
@@ -44,7 +45,8 @@ export function model(ctx) {
       school: t(e.school),
       range: e.end ? `${fmtDate(e.start, lang)} – ${fmtDate(e.end, lang)}` : `${ui.since} ${fmtDate(e.start, lang)}`,
       current: !e.end,
-      note: t(e.note)
+      note: t(e.note),
+      icon: e.icon ? { src: e.icon.src, alt: t(e.icon.alt), logo: !!e.icon.logo } : null
     })),
     certificates: P.certificates.map((c) => ({ title: t(c.title), issuer: t(c.issuer), year: c.year, icon: c.icon ? { src: c.icon.src, alt: t(c.icon.alt), logo: !!c.icon.logo } : null })),
     skills: P.skills.map((g) => ({ group: t(g.group), items: g.items.map(t) })),

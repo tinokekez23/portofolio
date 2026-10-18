@@ -127,6 +127,8 @@ a:hover { color: var(--jade); }
 .job-when span { display: block; }
 .job h3 { font-size: 1.25rem; font-weight: 600; line-height: 1.3; letter-spacing: -.01em; }
 .job-org { color: var(--muted); margin: .15rem 0 .75rem; }
+.job-head { display: flex; align-items: flex-start; gap: 1rem; }
+.job-logo { flex: none; width: 3.5rem; height: 3.5rem; object-fit: contain; filter: drop-shadow(0 2px 4px rgb(0 0 0 / .15)); }
 .job ul { display: grid; gap: .35rem; }
 .job ul li { padding-left: 1.1rem; position: relative; }
 .job ul li::before { content: ""; position: absolute; left: 0; top: .75em; width: .45rem; height: 1.5px; background: var(--jade); }
@@ -303,8 +305,8 @@ a:hover { color: var(--jade); }
   }
 
   /* Club logos and icons settle in with a small pop */
-  .facts-list .vol-icon, .vol .vol-icon { transition: transform .5s var(--ease), filter .3s; }
-  .facts-list li:hover .vol-icon, .vol:hover .vol-icon { transform: scale(1.08) rotate(-3deg); }
+  .facts-list .vol-icon, .vol .vol-icon, .job-logo { transition: transform .5s var(--ease), filter .3s; }
+  .facts-list li:hover .vol-icon, .vol:hover .vol-icon, .job:hover .job-logo { transform: scale(1.08) rotate(-3deg); }
 
   /* Reading progress line under the header (scroll-driven, no JavaScript) */
   @supports (animation-timeline: scroll()) {
