@@ -21,6 +21,11 @@ export function renderHome(ctx) {
   </div>
 </li>`;
 
+  // Clubs and schools share one look: logo on the left, text beside it
+  const fact = (c) => `<li${c.icon ? ` class="has-icon"` : ""}>${c.icon ? `<img class="vol-icon is-logo" src="/${esc(c.icon.src)}" alt="${esc(c.icon.alt)}" width="80" height="80" loading="lazy">` : ""}<b>${esc(c.title)}</b>${c.issuer ? `<span>${esc(c.issuer)}</span>` : ""}${c.year ? `<span class="meta">${esc(c.year)}</span>` : ""}</li>`;
+  const sport = m.certificates.filter((c) => !c.licences.length);
+  const licences = m.certificates.filter((c) => c.licences.length);
+
   const vol = (v) => `<li class="vol">
   ${v.icon ? `<img class="vol-icon" src="/${esc(v.icon.src)}" alt="${esc(v.icon.alt)}" width="48" height="48" loading="lazy">` : ""}
   <div>
@@ -116,14 +121,18 @@ ${header(ctx)}
       </div>` : ""}
       <div class="two">
         <div>
-          <h3 class="sub">${ui.education}</h3>
-          <ul class="facts-list">${m.education.map((e) => `<li${e.icon ? ` class="has-icon"` : ""}>${e.icon ? `<img class="vol-icon is-logo" src="/${esc(e.icon.src)}" alt="${esc(e.icon.alt)}" width="48" height="48" loading="lazy">` : ""}<b>${esc(e.title)}</b><span>${esc(e.school)}</span><span class="meta">${esc(e.range)}${e.note ? `, ${esc(e.note.toLowerCase())}` : ""}</span></li>`).join("")}</ul>
+          <h3 class="sub">${ui.sport}</h3>
+          <ul class="facts-list">${sport.map(fact).join("")}</ul>
         </div>
         <div>
-          <h3 class="sub">${ui.certificates}</h3>
-          <ul class="facts-list">${m.certificates.map((c) => `<li${c.icon ? ` class="has-icon"` : ""}>${c.icon ? `<img class="vol-icon${c.icon.logo ? " is-logo" : ""}" src="/${esc(c.icon.src)}" alt="${esc(c.icon.alt)}" width="48" height="48" loading="lazy">` : ""}<b>${esc(c.title)}</b>${c.licences.length ? `<ul class="lic">${c.licences.map((l) => `<li><img src="/${esc(l.src)}" alt="${esc(l.alt)}" width="48" height="48" loading="lazy"><span>${esc(l.cat)}</span></li>`).join("")}</ul>` : ""}${c.issuer ? `<span>${esc(c.issuer)}</span>` : ""}${c.year ? `<span class="meta">${esc(c.year)}</span>` : ""}</li>`).join("")}</ul>
+          <h3 class="sub">${ui.education}</h3>
+          <ul class="facts-list">${m.education.map((e) => fact({ title: e.title, issuer: e.school, year: `${e.range}${e.note ? `, ${e.note.toLowerCase()}` : ""}`, icon: e.icon })).join("")}</ul>
         </div>
       </div>
+      ${licences.map((c) => `<div class="block">
+        <h3 class="sub">${ui.licence}</h3>
+        <ul class="lic">${c.licences.map((l) => `<li><img src="/${esc(l.src)}" alt="${esc(l.alt)}" width="64" height="64" loading="lazy"><span>${esc(l.cat)}</span></li>`).join("")}</ul>
+      </div>`).join("")}
     </div>
   </section>
 
