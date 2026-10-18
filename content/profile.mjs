@@ -30,7 +30,7 @@ export default {
   availability: { hr: "Slobodan za studentski posao i praksu", en: "Available for student work and internships" },
   email: "tinokekez23@gmail.com",
   phone: "", // upiši broj ako ga želiš javno prikazati
-  photo: "", // npr. "img/tino.webp" (stavi sliku u public/img), prazno = bez fotografije
+  photo: "img/tino.webp", // slika je u public/img, prazno = bez fotografije
   cvFile: "cv.pdf",
   // Slika koja se prikaže kad netko podijeli link (WhatsApp, LinkedIn…), 1200 × 630
   shareImage: {
