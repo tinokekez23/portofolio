@@ -155,11 +155,11 @@ a:hover { color: var(--jade); }
 .vol .job-org { margin: .15rem 0 .4rem; }
 
 /* Project page */
-.crumbs { padding-top: clamp(1.5rem, 4vw, 2.5rem); font-size: .95rem; color: var(--muted); }
-.crumbs ol { display: flex; flex-wrap: wrap; gap: .25rem .6rem; }
-.crumbs li + li::before { content: "/"; margin-right: .6rem; color: var(--line); }
-.crumbs a { text-decoration: none; }
-.crumbs a:hover { text-decoration: underline; }
+.case-back { padding-top: clamp(1.5rem, 4vw, 2.5rem); }
+.back-link { display: inline-flex; align-items: center; gap: .5rem; min-height: 2.75rem; font-weight: 600; text-decoration: none; }
+.back-link span { transition: transform .2s; }
+.back-link:hover { color: var(--jade); }
+.back-link:hover span { transform: translateX(-4px); }
 .case-head { padding-block: clamp(2rem, 6vw, 4rem) clamp(2rem, 5vw, 3rem); max-width: 48rem; }
 .case-kicker { color: var(--muted); font-size: 1rem; margin-bottom: .75rem; }
 .case-head h1 { font-size: clamp(2rem, 1.3rem + 3vw, 3.5rem); line-height: 1.08; font-weight: 600; letter-spacing: -.025em; text-wrap: balance; }
@@ -213,7 +213,7 @@ a:hover { color: var(--jade); }
 .foot-in { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
 
 @media print {
-  .bar, .hero-actions, .contact .cf, .foot a, .proj-links, .case-next, [data-copy] { display: none !important; }
+  .bar, .hero-actions, .contact .cf, .foot a, .proj-links, .case-back, .case-next, [data-copy] { display: none !important; }
   body { background: #fff; font-size: 11pt; }
   .sec { break-inside: avoid; padding-block: 1.25rem; }
 }
