@@ -136,18 +136,19 @@ a:hover { color: var(--jade); }
 
 .two { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; margin-top: 3.5rem; padding-top: 2.5rem; border-top: 1px solid var(--line); }
 @media (max-width: 40rem) { .two { grid-template-columns: 1fr; } }
-.facts-list { display: grid; gap: 2rem; }
+.facts-list { display: grid; gap: 1.5rem; }
 .facts-list li { display: grid; gap: .2rem; align-content: start; }
 .facts-list b { font-weight: 600; }
 .facts-list .meta { color: var(--muted); font-size: .95rem; }
-.facts-list .has-icon { grid-template-columns: 5rem minmax(0, 1fr); column-gap: 1.25rem; }
+.facts-list .has-icon { grid-template-columns: 4rem minmax(0, 1fr); column-gap: 1.1rem; }
 .facts-list .has-icon .vol-icon { grid-row: 1 / span 3; }
-.vol-icon.is-logo { width: 5rem; height: 5rem; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; object-fit: contain; filter: drop-shadow(0 2px 4px rgb(0 0 0 / .15)); }
+.vol-icon.is-logo { width: 4rem; height: 4rem; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; object-fit: contain; filter: drop-shadow(0 2px 4px rgb(0 0 0 / .15)); }
 .facts-list .has-icon > :not(img) { grid-column: 2; }
-.lic { display: grid; grid-template-columns: repeat(3, minmax(0, 7rem)); gap: clamp(.75rem, 3vw, 1.5rem); margin-top: .5rem; }
-.lic li { display: grid; justify-items: center; gap: .55rem; padding: 1rem .75rem .85rem; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); }
-.lic img { width: 100%; max-width: 5rem; height: auto; aspect-ratio: 1; object-fit: contain; }
-.lic span { font-weight: 600; font-size: 1.05rem; line-height: 1; color: var(--jade); }
+.lic-block { margin-top: 2.25rem; padding-top: 1.75rem; border-top: 1px solid var(--line); }
+.lic { display: grid; grid-template-columns: repeat(3, minmax(0, 5.5rem)); gap: clamp(.75rem, 3vw, 1.25rem); }
+.lic li { display: grid; justify-items: center; gap: .4rem; padding: .7rem .6rem .6rem; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); }
+.lic img { width: 100%; max-width: 3.5rem; height: auto; aspect-ratio: 1; object-fit: contain; }
+.lic span { font-weight: 600; font-size: .95rem; line-height: 1; color: var(--jade); }
 @media (prefers-color-scheme: dark) { .lic img { filter: invert(1) brightness(1.6) hue-rotate(180deg); } }
 
 /* Skills */

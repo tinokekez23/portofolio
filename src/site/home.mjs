@@ -129,9 +129,9 @@ ${header(ctx)}
           <ul class="facts-list">${m.education.map((e) => fact({ title: e.title, issuer: e.school, year: `${e.range}${e.note ? `, ${e.note.toLowerCase()}` : ""}`, icon: e.icon })).join("")}</ul>
         </div>
       </div>
-      ${licences.map((c) => `<div class="block">
+      ${licences.map((c) => `<div class="lic-block">
         <h3 class="sub">${ui.licence}</h3>
-        <ul class="lic">${c.licences.map((l) => `<li><img src="/${esc(l.src)}" alt="${esc(l.alt)}" width="64" height="64" loading="lazy"><span>${esc(l.cat)}</span></li>`).join("")}</ul>
+        <ul class="lic">${c.licences.map((l) => `<li><img src="/${esc(l.src)}" alt="${esc(l.alt)}" width="56" height="56" loading="lazy"><span>${esc(l.cat)}</span></li>`).join("")}</ul>
       </div>`).join("")}
     </div>
   </section>
