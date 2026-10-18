@@ -75,7 +75,6 @@ ${header(ctx)}
 
 <main id="sadrzaj">
   <section class="hero wrap" id="top" aria-labelledby="hero-h">
-    ${m.photo ? `<img class="hero-photo" src="/${esc(m.photo)}" alt="${esc(m.name)}" width="160" height="200">` : ""}
     <div class="hero-main">
     <h1 id="hero-h">${esc(m.name)} ${esc(m.headline)}</h1>
     <div class="hero-actions">

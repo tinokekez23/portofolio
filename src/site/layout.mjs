@@ -15,6 +15,7 @@ export function header(ctx, { home = "", path = "" } = {}) {
   return `<a class="skip" href="#sadrzaj">${ui.skip}</a>
 <header class="bar">
   <div class="wrap bar-in">
+    ${P.photo ? `<a class="avatar" href="/${esc(P.photo)}" data-photo><img src="/${esc(P.photo)}" alt="${ui.openPhoto}: ${esc(P.name)}" width="40" height="40"></a>` : ""}
     <a class="mark" href="${home || "#top"}">${esc(P.name)}</a>
     <nav id="nav" class="nav" aria-label="${ui.navLabel}" data-nav>
       ${SECTIONS.map(([key, id]) => `<a href="${home}#${id}">${ui.nav[key]}</a>`).join("\n      ")}

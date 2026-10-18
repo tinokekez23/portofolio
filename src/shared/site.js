@@ -23,6 +23,19 @@
     });
   }
 
+  /* Header photo: opens larger in a dialog; without JS the link opens the image itself. */
+  const photo = $("[data-photo]");
+  if (photo && window.HTMLDialogElement) {
+    const dlg = document.createElement("dialog");
+    dlg.className = "photo-dlg";
+    dlg.setAttribute("aria-label", $("img", photo).alt);
+    const close = document.documentElement.lang === "en" ? "Close" : "Zatvori";
+    dlg.innerHTML = `<img src="${photo.getAttribute("href")}" alt="" width="400" height="500"><button type="button">${close}</button>`;
+    document.body.append(dlg);
+    photo.addEventListener("click", (e) => { e.preventDefault(); dlg.showModal(); });
+    dlg.addEventListener("click", (e) => { if (e.target === dlg || e.target.closest("button")) dlg.close(); });
+  }
+
   /* Current section in the navigation */
   const links = $$("[data-nav] a[href^='#']");
   if (links.length && "IntersectionObserver" in window) {
