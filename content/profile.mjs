@@ -31,6 +31,7 @@ export default {
   email: "tinokekez23@gmail.com",
   phone: "", // upiši broj ako ga želiš javno prikazati
   photo: "img/tino.webp", // slika je u public/img, prazno = bez fotografije
+  photoSmall: "img/tino-mali.webp", // izrez lica za kružić u zaglavlju
   cvFile: "cv.pdf",
   // Slika koja se prikaže kad netko podijeli link (WhatsApp, LinkedIn…), 1200 × 630
   shareImage: {
@@ -52,6 +53,12 @@ export default {
       en: "I've worked in a warehouse, volunteered and trained combat sports for years, so I know how to work in a team, keep my word and learn fast. In my free time I play guitar, piano and drums, and go hiking."
     }
   ],
+
+  aboutPhoto: {
+    src: "img/gitara.webp",
+    alt: { hr: "Tino svira gitaru i pjeva na nastupu s bendom", en: "Tino playing guitar and singing at a gig with the band" },
+    caption: { hr: "Gitara i vokal na jednom od nastupa", en: "Guitar and vocals at one of our gigs" }
+  },
 
   experience: [
     {
@@ -110,8 +117,8 @@ export default {
   // Dozvole, sport i članstva
   certificates: [
     { title: { hr: "Vozačka dozvola B i AM", en: "Driving licence, categories B and AM" }, issuer: null, year: "" },
-    { title: { hr: "Kickboxing klub „Knez”", en: "Knez kickboxing club" }, issuer: { hr: "Četiri memorijalna turnira (point fighting, light contact)", en: "Four memorial tournaments (point fighting, light contact)" }, year: "2017–2023" },
-    { title: { hr: "MMA klub „BSK Pancration”", en: "BSK Pancration MMA club" }, issuer: { hr: "Aktivni član, Sinj", en: "Active member, Sinj" }, year: "2023–2024" }
+    { title: { hr: "Kickboxing klub „Knez”", en: "Knez kickboxing club" }, issuer: { hr: "Četiri memorijalna turnira (point fighting, light contact)", en: "Four memorial tournaments (point fighting, light contact)" }, year: "2017–2023", icon: { src: "img/kbk-knez.webp", alt: { hr: "Logo kickboxing kluba Knez", en: "Knez kickboxing club logo" }, logo: true } },
+    { title: { hr: "MMA klub „BSK Pancration”", en: "BSK Pancration MMA club" }, issuer: { hr: "Aktivni član, Sinj", en: "Active member, Sinj" }, year: "2023–2024", icon: { src: "img/bsk-pancration.webp", alt: { hr: "Logo borilačkog kluba Pancration", en: "Pancration combat sports club logo" }, logo: true } }
   ],
 
   // Vještine po skupinama, bez ocjena
