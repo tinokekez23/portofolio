@@ -100,7 +100,7 @@ ${header(ctx)}
     <h2 id="h-about">${ui.about}</h2>
     <div class="sec-body">
       <div class="prose">${m.about.map((p) => `<p>${esc(p)}</p>`).join("")}</div>
-      ${m.aboutPhoto ? `<figure class="about-photo"><img src="/${esc(m.aboutPhoto.src)}" alt="${esc(m.aboutPhoto.alt)}" width="1200" height="900" loading="lazy" decoding="async"><figcaption>${esc(m.aboutPhoto.caption)}</figcaption></figure>` : ""}
+      ${m.aboutPhoto ? `<figure class="about-photo"><a class="about-shot" href="/${esc(m.aboutPhoto.src)}" data-photo="wide"><img src="/${esc(m.aboutPhoto.src)}" alt="${esc(m.aboutPhoto.alt)}" width="1200" height="900" loading="lazy" decoding="async"></a><figcaption>${esc(m.aboutPhoto.caption)}</figcaption></figure>` : ""}
     </div>
   </section>
 

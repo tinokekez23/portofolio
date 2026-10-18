@@ -25,7 +25,7 @@
 
 *, *::before, *::after { box-sizing: border-box; }
 a, button, summary, input, textarea, label { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
-html { -webkit-text-size-adjust: 100%; scroll-padding-top: 5rem; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 6rem; }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 body { margin: 0; background: var(--stone); color: var(--ink); font: 400 1.125rem/1.6 var(--font); font-kerning: normal; -webkit-font-smoothing: antialiased; }
 h1, h2, h3, h4, p, ul, ol, dl, dd, figure { margin: 0; padding: 0; }
@@ -49,8 +49,14 @@ a:hover { color: var(--jade); }
 .photo-dlg::backdrop { background: rgb(16 35 32 / .6); }
 .photo-dlg img { display: block; width: 100%; height: auto; }
 .photo-dlg button { position: absolute; top: .6rem; right: .6rem; min-height: 2.5rem; padding: .4rem .8rem; border: 0; border-radius: 4px; background: rgb(255 255 255 / .9); color: #17302B; font: 600 .95rem var(--font); cursor: pointer; }
-.photo-dlg[open] { animation: dlg-in .2s ease-out; }
-@keyframes dlg-in { from { opacity: 0; transform: scale(.96); } }
+.photo-dlg.is-wide { max-width: min(60rem, calc(100vw - 2.5rem)); }
+.photo-dlg[open] { animation: dlg-in .35s cubic-bezier(.22, .8, .24, 1); }
+.photo-dlg[open]::backdrop { animation: fade-in .35s ease-out; }
+.photo-dlg.is-closing { animation: dlg-out .22s ease-in forwards; }
+.photo-dlg.is-closing::backdrop { animation: fade-in .22s ease-in reverse forwards; }
+@keyframes dlg-in { from { opacity: 0; transform: translateY(.75rem) scale(.94); } }
+@keyframes dlg-out { to { opacity: 0; transform: scale(.96); } }
+@keyframes fade-in { from { opacity: 0; } }
 .mark { font-weight: 700; text-decoration: none; letter-spacing: -.01em; margin-right: auto; }
 .nav { display: flex; gap: 1.75rem; font-size: 1rem; }
 .nav a { text-decoration: none; color: var(--muted); padding-block: .25rem; border-bottom: 2px solid transparent; }
@@ -109,7 +115,8 @@ a:hover { color: var(--jade); }
 @media (max-width: 52rem) { .sec { grid-template-columns: 1fr; } .sec > h2 { position: static; } }
 .prose { max-width: 38rem; display: grid; gap: 1.1em; font-size: clamp(1.125rem, 1rem + .3vw, 1.25rem); line-height: 1.6; }
 .about-photo { margin: clamp(2rem, 4vw, 2.75rem) 0 0; max-width: 40rem; }
-.about-photo img { display: block; width: 100%; height: auto; border-radius: 6px; box-shadow: 0 1px 2px rgb(0 0 0 / .08), 0 12px 32px -12px rgb(0 0 0 / .35); }
+.about-shot { display: block; overflow: hidden; border-radius: 6px; box-shadow: 0 1px 2px rgb(0 0 0 / .08), 0 12px 32px -12px rgb(0 0 0 / .35); cursor: zoom-in; }
+.about-shot img { display: block; width: 100%; height: auto; }
 .about-photo figcaption { margin-top: .75rem; padding-left: .85rem; border-left: 2px solid var(--jade); color: var(--muted); font-size: .95rem; line-height: 1.4; }
 .sub { font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem; }
 
@@ -277,14 +284,34 @@ a:hover { color: var(--jade); }
 
   /* Sections fade in as they scroll into view. site.js marks only what starts
      below the fold, so nothing visible on load ever blinks. */
-  [data-reveal] { opacity: 0; transform: translateY(1.5rem); transition: opacity .7s var(--ease), transform .7s var(--ease); transition-delay: calc(var(--i, 0) * 70ms); }
-  [data-reveal="in"] { opacity: 1; transform: none; }
+  [data-reveal] { opacity: 0; transform: translateY(1.75rem); filter: blur(4px); transition: opacity .9s var(--ease), transform .9s var(--ease), filter .9s var(--ease); transition-delay: calc(var(--i, 0) * 70ms); }
+  [data-reveal="in"] { opacity: 1; transform: none; filter: none; }
+
+  /* Guitar photo: unveils from the bottom while the picture settles from a slight
+     zoom, then drifts gently while scrolling past (parallax, no JavaScript). */
+  .about-photo[data-reveal] { opacity: 1; transform: none; filter: none; }
+  .about-photo[data-reveal] .about-shot { clip-path: inset(100% 0 0 0 round 6px); transition: clip-path 1.1s var(--ease), box-shadow .4s var(--ease), transform .4s var(--ease); }
+  .about-photo[data-reveal] .about-shot img { transform: scale(1.18); transition: transform 1.6s var(--ease); }
+  .about-photo[data-reveal] figcaption { opacity: 0; transform: translateX(-.75rem); }
+  .about-photo[data-reveal="in"] .about-shot { clip-path: inset(0 0 0 0 round 6px); }
+  .about-photo[data-reveal="in"] .about-shot img { transform: scale(1.06); }
+  .about-photo[data-reveal="in"] figcaption { opacity: 1; transform: none; transition: opacity .6s var(--ease) .7s, transform .6s var(--ease) .7s; }
+  .about-shot:hover { transform: translateY(-4px); box-shadow: 0 2px 4px rgb(0 0 0 / .08), 0 22px 44px -14px rgb(0 0 0 / .45); }
+  .about-shot img { transition: transform .9s var(--ease); }
+  @supports (animation-timeline: view()) {
+    .about-shot img { scale: 1.06; animation: drift linear both; animation-timeline: view(); }
+  }
+
+  /* Club logos and icons settle in with a small pop */
+  .facts-list .vol-icon, .vol .vol-icon { transition: transform .5s var(--ease), filter .3s; }
+  .facts-list li:hover .vol-icon, .vol:hover .vol-icon { transform: scale(1.08) rotate(-3deg); }
 
   /* Reading progress line under the header (scroll-driven, no JavaScript) */
   @supports (animation-timeline: scroll()) {
     .bar::after { content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--jade); transform-origin: 0 50%; transform: scaleX(0); animation: grow linear both; animation-timeline: scroll(root); }
   }
 }
+@keyframes drift { from { translate: 0 -4%; } to { translate: 0 4%; } }
 @keyframes rise { from { opacity: 0; transform: translateY(1.25rem); } }
 @keyframes drop { from { opacity: 0; transform: translateY(-.5rem); } }
 @keyframes grow { to { transform: scaleX(1); } }
