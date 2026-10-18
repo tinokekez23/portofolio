@@ -54,6 +54,12 @@ export default {
     }
   ],
 
+  aboutPhoto: {
+    src: "img/gitara.webp",
+    alt: { hr: "Tino svira gitaru i pjeva na nastupu s bendom", en: "Tino playing guitar and singing at a gig with the band" },
+    caption: { hr: "Gitara i vokal na jednom od nastupa", en: "Guitar and vocals at one of our gigs" }
+  },
+
   experience: [
     {
       role: { hr: "Skladišni radnik, sortiranje i otprema robe", en: "Warehouse worker, sorting and dispatch" },
@@ -111,8 +117,8 @@ export default {
   // Dozvole, sport i članstva
   certificates: [
     { title: { hr: "Vozačka dozvola B i AM", en: "Driving licence, categories B and AM" }, issuer: null, year: "" },
-    { title: { hr: "Kickboxing klub „Knez”", en: "Knez kickboxing club" }, issuer: { hr: "Četiri memorijalna turnira (point fighting, light contact)", en: "Four memorial tournaments (point fighting, light contact)" }, year: "2017–2023", icon: { src: "img/kickboxing.svg", alt: { hr: "Kickboxing rukavica", en: "Kickboxing glove" } } },
-    { title: { hr: "MMA klub „BSK Pancration”", en: "BSK Pancration MMA club" }, issuer: { hr: "Aktivni član, Sinj", en: "Active member, Sinj" }, year: "2023–2024", icon: { src: "img/mma.svg", alt: { hr: "MMA oktagon", en: "MMA octagon" } } }
+    { title: { hr: "Kickboxing klub „Knez”", en: "Knez kickboxing club" }, issuer: { hr: "Četiri memorijalna turnira (point fighting, light contact)", en: "Four memorial tournaments (point fighting, light contact)" }, year: "2017–2023", icon: { src: "img/kbk-knez.webp", alt: { hr: "Logo kickboxing kluba Knez", en: "Knez kickboxing club logo" }, logo: true } },
+    { title: { hr: "MMA klub „BSK Pancration”", en: "BSK Pancration MMA club" }, issuer: { hr: "Aktivni član, Sinj", en: "Active member, Sinj" }, year: "2023–2024", icon: { src: "img/bsk-pancration.webp", alt: { hr: "Logo borilačkog kluba Pancration", en: "Pancration combat sports club logo" }, logo: true } }
   ],
 
   // Vještine po skupinama, bez ocjena

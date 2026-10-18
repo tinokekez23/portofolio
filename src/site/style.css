@@ -108,6 +108,9 @@ a:hover { color: var(--jade); }
 .sec > h2 { font-size: clamp(1.5rem, 1.2rem + 1vw, 2rem); font-weight: 600; letter-spacing: -.02em; line-height: 1.15; align-self: start; position: sticky; top: 5.5rem; }
 @media (max-width: 52rem) { .sec { grid-template-columns: 1fr; } .sec > h2 { position: static; } }
 .prose { max-width: 38rem; display: grid; gap: 1.1em; font-size: clamp(1.125rem, 1rem + .3vw, 1.25rem); line-height: 1.6; }
+.about-photo { margin: clamp(2rem, 4vw, 2.75rem) 0 0; max-width: 40rem; }
+.about-photo img { display: block; width: 100%; height: auto; border-radius: 6px; box-shadow: 0 1px 2px rgb(0 0 0 / .08), 0 12px 32px -12px rgb(0 0 0 / .35); }
+.about-photo figcaption { margin-top: .75rem; padding-left: .85rem; border-left: 2px solid var(--jade); color: var(--muted); font-size: .95rem; line-height: 1.4; }
 .sub { font-size: 1.125rem; font-weight: 600; margin-bottom: 1rem; }
 
 /* Experience */
@@ -128,8 +131,9 @@ a:hover { color: var(--jade); }
 .facts-list li { display: grid; gap: .1rem; }
 .facts-list b { font-weight: 600; }
 .facts-list .meta { color: var(--muted); font-size: .95rem; }
-.facts-list .has-icon { grid-template-columns: 3rem minmax(0, 1fr); column-gap: 1.25rem; }
+.facts-list .has-icon { grid-template-columns: 4rem minmax(0, 1fr); column-gap: 1.25rem; }
 .facts-list .has-icon .vol-icon { grid-row: 1 / span 3; }
+.vol-icon.is-logo { width: 4rem; height: 4rem; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; object-fit: contain; filter: drop-shadow(0 2px 4px rgb(0 0 0 / .15)); }
 .facts-list .has-icon > :not(img) { grid-column: 2; }
 
 /* Skills */
@@ -227,6 +231,7 @@ a:hover { color: var(--jade); }
   .bar, .hero-actions, .contact .cf, .foot a, .proj-links, .case-back, .case-next, [data-copy] { display: none !important; }
   body { background: #fff; font-size: 11pt; }
   .sec { break-inside: avoid; padding-block: 1.25rem; }
+  .about-photo { display: none; }
 }
 
 /* Motion. Everything below is decoration: with reduced motion, or without

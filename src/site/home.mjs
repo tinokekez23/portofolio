@@ -98,7 +98,10 @@ ${header(ctx)}
 
   <section class="sec wrap" id="o-meni" aria-labelledby="h-about">
     <h2 id="h-about">${ui.about}</h2>
-    <div class="sec-body prose">${m.about.map((p) => `<p>${esc(p)}</p>`).join("")}</div>
+    <div class="sec-body">
+      <div class="prose">${m.about.map((p) => `<p>${esc(p)}</p>`).join("")}</div>
+      ${m.aboutPhoto ? `<figure class="about-photo"><img src="/${esc(m.aboutPhoto.src)}" alt="${esc(m.aboutPhoto.alt)}" width="1200" height="900" loading="lazy" decoding="async"><figcaption>${esc(m.aboutPhoto.caption)}</figcaption></figure>` : ""}
+    </div>
   </section>
 
   <section class="sec wrap" id="iskustvo" aria-labelledby="h-exp">
@@ -116,7 +119,7 @@ ${header(ctx)}
         </div>
         <div>
           <h3 class="sub">${ui.certificates}</h3>
-          <ul class="facts-list">${m.certificates.map((c) => `<li${c.icon ? ` class="has-icon"` : ""}>${c.icon ? `<img class="vol-icon" src="/${esc(c.icon.src)}" alt="${esc(c.icon.alt)}" width="48" height="48" loading="lazy">` : ""}<b>${esc(c.title)}</b>${c.issuer ? `<span>${esc(c.issuer)}</span>` : ""}${c.year ? `<span class="meta">${esc(c.year)}</span>` : ""}</li>`).join("")}</ul>
+          <ul class="facts-list">${m.certificates.map((c) => `<li${c.icon ? ` class="has-icon"` : ""}>${c.icon ? `<img class="vol-icon${c.icon.logo ? " is-logo" : ""}" src="/${esc(c.icon.src)}" alt="${esc(c.icon.alt)}" width="48" height="48" loading="lazy">` : ""}<b>${esc(c.title)}</b>${c.issuer ? `<span>${esc(c.issuer)}</span>` : ""}${c.year ? `<span class="meta">${esc(c.year)}</span>` : ""}</li>`).join("")}</ul>
         </div>
       </div>
     </div>
