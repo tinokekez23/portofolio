@@ -52,7 +52,7 @@
 
   /* Reveal on scroll. Only blocks that start below the fold are hidden, so the
      first screen never blinks; the CSS decides whether anything actually moves. */
-  const reveal = $$(".sec > h2, .prose > p, .job, .two > div, .skills > div, .proj, .contact-side, .cf, .quote");
+  const reveal = $$(".sec > h2, .prose > p, .job, .vol, .two > div, .skills > div, .proj, .contact-side, .cf, .quote, .case-body > section");
   if (reveal.length && "IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
     // Read every position before changing anything, so the browser lays the page out once.
     const below = reveal.filter((el) => el.getBoundingClientRect().top >= innerHeight);
@@ -100,21 +100,6 @@
       v.addEventListener("click", toggle);
       v.addEventListener("keydown", (e) => { if (e.key === " " || e.key === "Enter") { e.preventDefault(); toggle(); } });
       vio.observe(v);
-    });
-  }
-
-  /* Light/dark toggle (designs that have one). theme.js has already applied the saved choice. */
-  const themeBtn = $("[data-theme-toggle]");
-  if (themeBtn) {
-    const root = document.documentElement;
-    const current = () => root.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-    const sync = () => themeBtn.setAttribute("aria-pressed", String(current() === "dark"));
-    themeBtn.hidden = false;
-    sync();
-    themeBtn.addEventListener("click", () => {
-      root.dataset.theme = current() === "dark" ? "light" : "dark";
-      try { localStorage.setItem("theme", root.dataset.theme); } catch { /* private mode: choice lasts this visit */ }
-      sync();
     });
   }
 

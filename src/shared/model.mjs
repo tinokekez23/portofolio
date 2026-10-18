@@ -30,6 +30,14 @@ export function model(ctx) {
       points: j.points.map(t),
       tags: (j.tags || []).map(t)
     })),
+    volunteering: P.volunteering.map((v) => ({
+      role: t(v.role),
+      company: t(v.company),
+      place: t(v.place),
+      range: fmtRange(v.start, v.end, lang, ui),
+      points: v.points.map(t),
+      icon: v.icon ? { src: v.icon.src, alt: t(v.icon.alt) } : null
+    })),
     education: P.education.map((e) => ({
       title: t(e.title),
       school: t(e.school),

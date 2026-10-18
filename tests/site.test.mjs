@@ -10,7 +10,8 @@ import P from "../content/profile.mjs";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const DIST = join(ROOT, "dist");
-const LIVE = ["index.html", "en/index.html"];
+const PROJECTS = P.projects.filter((p) => p.status !== "planned").map((p) => `projekti/${p.id}/index.html`);
+const LIVE = ["index.html", "en/index.html", ...PROJECTS, ...PROJECTS.map((p) => `en/${p}`)];
 
 async function walk(dir) {
   const out = [];
@@ -63,13 +64,13 @@ test("live pages have language, title, description, canonical and one h1", async
     assert.match(html, /<title>[^<]{10,70}<\/title>/, f);
     const desc = html.match(/<meta name="description" content="([^"]+)"/)?.[1] ?? "";
     assert.ok(desc.length >= 50 && desc.length <= 160, `${f}: description is ${desc.length} characters`);
-    assert.match(html, new RegExp(`<link rel="canonical" href="${P.siteUrl}/${lang === "en" ? "en/" : ""}">`), f);
+    assert.match(html, new RegExp(`<link rel="canonical" href="${P.siteUrl}/${f.replace("index.html", "")}">`), f);
     assert.equal(html.match(/<h1[\s>]/g)?.length, 1, `${f}: h1 count`);
     assert.doesNotMatch(html, /name="robots" content="noindex"/, f);
   }
 });
 
-test("structured data parses and describes the same person on both pages", async () => {
+test("structured data parses and names the same person on every page", async () => {
   for (const f of LIVE) {
     const html = await readFile(join(DIST, f), "utf8");
     const json = html.match(/<script type="application\/ld\+json">(.+?)<\/script>/s)?.[1];
@@ -78,14 +79,23 @@ test("structured data parses and describes the same person on both pages", async
     const person = graph.find((n) => n["@type"] === "Person");
     assert.equal(person.name, P.name);
     assert.equal(person["@id"], `${P.siteUrl}/#person`);
-    assert.ok(graph.find((n) => n["@type"] === "ProfilePage").mainEntity["@id"] === person["@id"]);
+    const main = graph.find((n) => n["@type"] === "ProfilePage" || n["@type"] === "CreativeWork");
+    assert.equal((main.mainEntity || main.creator)["@id"], person["@id"], f);
   }
 });
 
-test("design previews and the 404 page stay out of search results", async () => {
-  for (const f of pages.map((p) => relative(DIST, p)).filter((p) => p.startsWith("designs/") || p === "404.html")) {
-    assert.match(await readFile(join(DIST, f), "utf8"), /<meta name="robots" content="noindex">/, f);
+test("the 404 page stays out of search results", async () => {
+  assert.match(await readFile(join(DIST, "404.html"), "utf8"), /<meta name="robots" content="noindex">/);
+});
+
+test("every image has alt text", async () => {
+  const missing = [];
+  for (const file of pages) {
+    for (const m of (await readFile(file, "utf8")).matchAll(/<img\b[^>]*>/g)) {
+      if (!/\salt="[^"]+"/.test(m[0])) missing.push(`${relative(DIST, file)}: ${m[0].slice(0, 80)}`);
+    }
   }
+  assert.deepEqual(missing, []);
 });
 
 test("sitemap lists only pages that exist", async () => {

@@ -55,14 +55,6 @@ export default {
 
   experience: [
     {
-      role: { hr: "Dobrovoljni darivatelj krvi", en: "Voluntary blood donor" },
-      company: { hr: "Hrvatski Crveni križ", en: "Croatian Red Cross" },
-      place: { hr: "Hrvatska", en: "Croatia" },
-      start: "2024-12", end: null,
-      points: [{ hr: "Redovito darujem krv.", en: "I donate blood regularly." }],
-      tags: [{ hr: "Volontiranje", en: "Volunteering" }]
-    },
-    {
       role: { hr: "Skladišni radnik, sortiranje i otprema robe", en: "Warehouse worker, sorting and dispatch" },
       company: "HNK Hajduk Split",
       place: { hr: "Split", en: "Split" },
@@ -74,6 +66,18 @@ export default {
         { hr: "Održavao red i poštivao pravila zaštite na radu.", en: "Kept the warehouse tidy and followed health and safety rules." }
       ],
       tags: [{ hr: "Logistika", en: "Logistics" }, { hr: "Evidencija zaliha", en: "Inventory" }, { hr: "Timski rad", en: "Teamwork" }]
+    }
+  ],
+
+  // Volontiranje: prikazuje se kao zaseban dio ispod radnog iskustva
+  volunteering: [
+    {
+      role: { hr: "Dobrovoljni darivatelj krvi", en: "Voluntary blood donor" },
+      company: { hr: "Hrvatski Crveni križ", en: "Croatian Red Cross" },
+      place: { hr: "Hrvatska", en: "Croatia" },
+      start: "2024-12", end: null,
+      points: [{ hr: "Redovito darujem krv.", en: "I donate blood regularly." }],
+      icon: { src: "img/darivanje-krvi.svg", alt: { hr: "Kap krvi", en: "A drop of blood" } }
     },
     {
       role: { hr: "Volonter na glazbenim radionicama", en: "Volunteer, music workshops" },
@@ -84,7 +88,7 @@ export default {
         { hr: "Kroz sviranje radio s djecom s posebnim potrebama i pomagao u svakodnevnim aktivnostima.", en: "Worked with children with special needs through music and helped with daily activities." },
         { hr: "Naučio strpljivo i jasno komunicirati.", en: "Learned to communicate patiently and clearly." }
       ],
-      tags: [{ hr: "Volontiranje", en: "Volunteering" }, { hr: "Komunikacija", en: "Communication" }]
+      icon: { src: "img/glazbene-radionice.svg", alt: { hr: "Glazbene note", en: "Music notes" } }
     }
   ],
 
@@ -110,12 +114,11 @@ export default {
     { title: { hr: "MMA klub „BSK Pancration”", en: "BSK Pancration MMA club" }, issuer: { hr: "Aktivni član, Sinj", en: "Active member, Sinj" }, year: "2023–2024" }
   ],
 
-  // Vještine bez ocjena: "now" = ono što trenutno učim i koristim, "solid" = ono u čemu sam siguran
+  // Vještine po skupinama, bez ocjena
   skills: [
     { group: { hr: "Učim i koristim", en: "Learning and using" }, items: ["HTML", "CSS", "JavaScript", "Git i GitHub"] },
     { group: { hr: "Sa studija", en: "From university" }, items: [{ hr: "Osnove programiranja", en: "Programming basics" }, { hr: "Baze podataka i SQL", en: "Databases and SQL" }] },
-    { group: { hr: "Pouzdano znam", en: "Confident with" }, items: ["Word, Excel, PowerPoint", { hr: "Evidencija i logistika", en: "Records and logistics" }] },
-    { group: { hr: "Kako radim", en: "How I work" }, items: [{ hr: "Timski rad", en: "Teamwork" }, { hr: "Rješavanje problema", en: "Problem solving" }, { hr: "Organizacija vremena", en: "Time management" }, { hr: "Rad pod pritiskom", en: "Working under pressure" }] }
+    { group: { hr: "Pouzdano znam", en: "Confident with" }, items: ["Word, Excel, PowerPoint", { hr: "Evidencija i logistika", en: "Records and logistics" }] }
   ],
   // CEFR razine: A1, A2, B1, B2, C1, C2 ili "native"
   languages: [
@@ -151,7 +154,7 @@ export default {
         alt: { hr: "Snimka igre: Arthur skače na platformu, udarcem ruši dva goblina i dolazi do cilja", en: "Gameplay clip: Arthur jumps onto a platform, knocks out two goblins and reaches the goal" }
       },
       image: { src: "img/arthur", width: 1200, height: 750, alt: { hr: "Arthur na platformi u špilji, pored goblina", en: "Arthur on a cave platform next to a goblin" } },
-      links: [{ label: { hr: "Igraj u pregledniku", en: "Play in the browser" }, url: "/projekti/arthur/" }]
+      links: [{ label: { hr: "Igraj u pregledniku", en: "Play in the browser" }, url: "/projekti/arthur/igra/" }]
     },
     {
       id: "ednevnik",

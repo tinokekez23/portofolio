@@ -1,0 +1,90 @@
+@font-face { font-family: "Schibsted"; src: url(/fonts/schibsted.woff2) format("woff2"); font-weight: 400 900; font-display: swap; }
+@font-face { font-family: "Schibsted"; src: url(/fonts/schibsted-hr.woff2) format("woff2"); font-weight: 400 900; font-display: swap; unicode-range: U+0106-0107, U+010C-010D, U+0110-0111, U+0160-0161, U+017D-017E; }
+
+:root {
+  --bg: #102320;
+  --panel: #16302C;
+  --ink: #E4EDEA;
+  --muted: #A2B7B2;
+  --jade: #6CCBBE;
+  --line: #2C4742;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { height: 100%; width: 100%; }
+
+body {
+  align-content: start;
+  background: var(--bg);
+  color: var(--ink);
+  display: grid;
+  font: 400 1rem/1.5 "Schibsted", "Helvetica Neue", Arial, sans-serif;
+  justify-items: center;
+}
+
+main { display: contents; }
+
+a { color: inherit; text-underline-offset: .2em; }
+a:hover { color: var(--jade); }
+:focus-visible { outline: 2px solid var(--jade); outline-offset: 3px; }
+
+#divIzbornik { width: 100%; padding: 0 clamp(1rem, 3vw, 2rem) .75rem; text-align: center; }
+
+.vrh { display: flex; align-items: center; justify-content: space-between; gap: 1rem; min-height: 3.5rem; border-bottom: 1px solid var(--line); margin-bottom: .75rem; }
+.vrh h1 { font-size: 1.05rem; font-weight: 600; }
+.znak { font-weight: 700; text-decoration: none; }
+.o-projektu { color: var(--muted); }
+
+.upute { color: var(--muted); margin-bottom: .75rem; }
+.upute b { color: var(--ink); font-weight: 600; }
+
+.gumbi { display: inline-flex; flex-wrap: wrap; justify-content: center; gap: .5rem; }
+
+button, select {
+  background: none;
+  border: 1.5px solid var(--line);
+  border-radius: 4px;
+  color: var(--ink);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: .95rem;
+  font-weight: 600;
+  line-height: 1.2;
+  min-height: 2.5rem;
+  padding: .45rem 1rem;
+}
+button:hover, select:hover { border-color: var(--jade); }
+#btnStart { background: var(--jade); border-color: var(--jade); color: #0B1F1C; }
+select { background: var(--panel); margin-left: .5rem; }
+
+/* The course framework writes emoji icons and an inline blue colour into the buttons. */
+.emoji { display: none; }
+#btnSetupGame b { color: inherit !important; }
+
+canvas {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  image-rendering: pixelated;
+}
+
+.infowrapper { margin: .5rem 0; padding: 3px; width: 90%; }
+
+p.info { color: var(--muted); font-size: .9rem; text-align: left; }
+p.info input { accent-color: var(--jade); margin-right: .35rem; }
+
+textarea.info {
+  background: #000;
+  border: 1px solid var(--line);
+  color: #9fe8c9;
+  font-family: ui-monospace, "Courier New", monospace;
+  margin-top: .35rem;
+  padding: 5px;
+  text-align: left;
+  width: 100%;
+}
+
+@media (max-width: 40rem) {
+  .vrh h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+}
