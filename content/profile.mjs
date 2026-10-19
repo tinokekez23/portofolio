@@ -36,6 +36,9 @@ export default {
   cvFile: { hr: "cv.pdf", en: "cv-en.pdf" },
   // Kod iz Google Search Console (Dodaj svojstvo → Prefiks URL-a → HTML oznaka), samo vrijednost content="..."
   googleVerification: "",
+  // Brojanje posjeta (Vercel Web Analytics, bez kolačića). Mora biti uključeno i u Vercelu:
+  // projekt → Analytics → Enable, pa novi deploy. false = bez brojanja.
+  analytics: true,
   // Slika koja se prikaže kad netko podijeli link (WhatsApp, LinkedIn…), 1200 × 630
   shareImage: {
     src: { hr: "img/share/tino-kekez-hr.jpg", en: "img/share/tino-kekez-en.jpg" },

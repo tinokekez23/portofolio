@@ -59,6 +59,15 @@ Dok ključ nije postavljen, obrazac se uopće ne prikazuje, nego samo adresa e-p
 
 Projekt je spreman za Vercel: `vercel.json` pokreće `npm run build`, objavljuje `dist/`, postavlja sigurnosna zaglavlja (CSP i ostala) i dugo keširanje fontova i skripti (imena skripti u `dist/assets/` sadrže hash sadržaja, pa se nova verzija uvijek učita). Funkcija u `api/` objavljuje se automatski. Build sam napravi i `favicon.svg`, `site.webmanifest`, `sitemap.xml`, `llms.txt` i `404.html`.
 
+## Brojanje posjeta
+
+Vercel Web Analytics, bez kolačića: broji posjete stranicama, odakle su ljudi došli (npr. LinkedIn), zemlju i vrstu uređaja. Na Hobby planu uključeno je 50.000 događaja mjesečno, a podaci se vide za zadnjih mjesec dana.
+
+1. Vercel → projekt → **Analytics** → **Enable**.
+2. Novi deploy (spajanje PR-a ili Deployments → Redeploy). Tek tada Vercel počne posluživati `/_vercel/insights/script.js`.
+
+Preuzimanje CV-a, SQL skripte i otvaranje igre broje se kao posjeta toj datoteci (`/cv.pdf`, `/projekti/ednevnik.sql`, `/projekti/arthur/igra/`), jer PDF ne može pokrenuti skriptu; to radi `site.js` na linkovima s `data-count`. Vlastiti događaji (custom events) na Hobby planu ne postoje, pa se ne koriste. Za isključivanje stavi `analytics: false` u `content/profile.mjs`.
+
 ## Tražilice i AI alati
 
 - `sitemap.xml`: sve stranice s HR, EN i `x-default` alternativama; `lastmod` je datum zadnjeg commita koji je mijenjao sadržaj (bez git povijesti se izostavlja).

@@ -1,4 +1,5 @@
 import { esc } from "./util.mjs";
+import { analyticsScript } from "./parts.mjs";
 
 // dist/404.html, which Vercel serves for any missing URL. One page for both languages,
 // since the URL that failed doesn't say which one the visitor reads.
@@ -37,6 +38,7 @@ a:focus-visible { outline: 2px solid var(--link); outline-offset: 3px; }
 <p><a href="/en/">${esc(P.name)}, home page</a></p>
 </section>
 </main>
+${analyticsScript(P)}
 </body>
 </html>
 `;

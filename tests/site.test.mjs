@@ -47,7 +47,7 @@ test("every local link, image, script and font resolves", async () => {
       if (/^(mailto:|tel:|data:|#|javascript:)/.test(r)) continue;
       if (r.startsWith(P.siteUrl)) r = r.slice(P.siteUrl.length) || "/";
       else if (/^[a-z]+:/i.test(r)) continue;
-      if (r.startsWith("/api/")) continue;
+      if (r.startsWith("/api/") || r.startsWith("/_vercel/")) continue;
       const path = r.split(/[?#]/)[0];
       const target = path.startsWith("/") ? join(DIST, path) : join(dirname(file), path);
       if (!(await exists(target))) broken.push(`${relative(DIST, file)} -> ${r}`);
@@ -135,6 +135,20 @@ test("llms.txt links only to pages and files that exist", async () => {
   const local = [...txt.matchAll(/\]\((https?:[^)]+)\)/g)].map((m) => m[1]).filter((u) => u.startsWith(P.siteUrl));
   assert.ok(local.length >= 3);
   for (const u of local) assert.ok(await exists(join(DIST, u.slice(P.siteUrl.length) || "/")), u);
+});
+
+test("every page loads the analytics script once, after site.js, when analytics is on", async () => {
+  for (const f of [...LIVE, "404.html"]) {
+    const html = await readFile(join(DIST, f), "utf8");
+    const tags = html.match(/<script src="\/_vercel\/insights\/script\.js" defer><\/script>/g) ?? [];
+    assert.equal(tags.length, P.analytics ? 1 : 0, f);
+    const site = html.indexOf('src="/assets/site.');
+    if (P.analytics && site !== -1) assert.ok(site < html.indexOf("/_vercel/insights/"), `${f}: analytics before site.js`);
+  }
+  // The CV can't run the script, so its download link is counted on click
+  for (const f of ["index.html", "en/index.html"]) {
+    assert.match(await readFile(join(DIST, f), "utf8"), /<a [^>]*href="\/cv[^"]*\.pdf"[^>]*data-count/, f);
+  }
 });
 
 test("robots.txt keeps the site open and points to the sitemap", async () => {

@@ -64,7 +64,7 @@ ${header(ctx, { home, path })}
     <p class="case-kicker">${ui.projectOf} · ${esc(p.year)}</p>
     <h1>${esc(p.title)}</h1>
     <p class="case-lead">${esc(p.summary)}</p>
-    ${p.links.length ? `<p class="case-actions">${p.links.map((l, i) => `<a class="btn${i ? "" : " btn-solid"}" href="${esc(l.url)}">${esc(l.label)}</a>`).join(" ")}</p>` : ""}
+    ${p.links.length ? `<p class="case-actions">${p.links.map((l, i) => `<a class="btn${i ? "" : " btn-solid"}" href="${esc(l.url)}" data-count>${esc(l.label)}</a>`).join(" ")}</p>` : ""}
   </header>
 
   ${media}

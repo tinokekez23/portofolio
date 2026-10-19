@@ -239,6 +239,7 @@ a:hover { color: var(--jade); }
 @media (prefers-color-scheme: dark) { .cf-send { color: #0B1F1C; } }
 .cf-send:hover { background: var(--ink); color: var(--stone); }
 .cf-send:disabled { opacity: .6; cursor: progress; }
+.cf-note { color: var(--muted); font-size: .9rem; }
 .cf-status:empty { display: none; }
 .cf-status { padding: .9rem 1rem; border-radius: 4px; background: var(--jade-soft); }
 .cf-status[data-kind="err"] { background: color-mix(in srgb, var(--err) 12%, transparent); }

@@ -93,6 +93,7 @@ ${field("name", f.name, `<input id="cf-name" type="text" name="name" autocomplet
 ${field("email", f.email, `<input id="cf-email" name="email" type="email" autocomplete="email" spellcheck="false" required maxlength="200" aria-describedby="cf-email-err">`)}
 ${field("message", f.message, `<textarea id="cf-message" name="message" rows="6" required minlength="10" maxlength="5000" aria-describedby="cf-message-err"></textarea>`)}
 <div class="cf-actions"><button class="cf-send" type="submit">${f.send}</button></div>
+<p class="cf-note">${f.privacy}</p>
 <p class="cf-status" role="status" aria-live="polite"></p>
 </form>`;
 }
@@ -100,5 +101,9 @@ ${field("message", f.message, `<textarea id="cf-message" name="message" rows="6"
 export const langLink = (ctx, path = "", cls = "lang") =>
   `<a class="${cls}" href="/${ctx.lang === "hr" ? "en/" : ""}${path}" hreflang="${ctx.lang === "hr" ? "en" : "hr"}" lang="${ctx.lang === "hr" ? "en" : "hr"}">${ctx.ui.otherLangShort}<span class="sr"> (${ctx.ui.otherLangLabel})</span></a>`;
 
+// Vercel serves its Web Analytics script here once Analytics is enabled for the project.
+export const analyticsScript = (P) => (P.analytics ? '<script src="/_vercel/insights/script.js" defer></script>' : "");
+
+// site.js comes first: it sets up the queue the analytics script reads.
 export const script = (ctx, extra = []) =>
-  ["site.js", ...extra].map((s) => `<script src="/assets/${ctx.asset(s)}" defer></script>`).join("\n");
+  [...["site.js", ...extra].map((s) => `<script src="/assets/${ctx.asset(s)}" defer></script>`), analyticsScript(ctx.P)].filter(Boolean).join("\n");
