@@ -71,7 +71,7 @@ function llmsTxt() {
     "",
     `- [Home page in English](${P.siteUrl}/en/): CV, experience, skills, projects and contact`,
     `- [Home page in Croatian](${P.siteUrl}/): the same content in Croatian`,
-    `- [CV (PDF, Croatian)](${P.siteUrl}/${P.cvFile})`,
+    `- [CV (PDF)](${P.siteUrl}/${en(P.cvFile)})`,
     "",
     "## Projects",
     "",

@@ -86,7 +86,7 @@ ${header(ctx)}
     <h1 id="hero-h">${esc(m.name)} ${esc(m.headline)}</h1>
     <div class="hero-actions">
       <a class="btn btn-solid" href="#projekti">${ui.seeProjects}</a>
-      <a class="btn" href="/${esc(m.cv)}" download>${ui.downloadCv}</a>
+      <a class="btn" href="/${esc(m.cv)}" download="${esc(m.name.replaceAll(" ", "-"))}-CV${lang === "en" ? "-EN" : ""}.pdf">${ui.downloadCv}</a>
       ${m.availability ? `<p class="avail"><span class="avail-dot" aria-hidden="true"></span>${esc(m.availability)}</p>` : ""}
     </div>
     </div>

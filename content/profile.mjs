@@ -32,7 +32,8 @@ export default {
   phone: "", // upiši broj ako ga želiš javno prikazati
   photo: "img/tino.webp", // slika je u public/img, prazno = bez fotografije
   photoSmall: "img/tino-mali.webp", // izrez lica za kružić u zaglavlju
-  cvFile: "cv.pdf",
+  // CV se radi iz ovih podataka naredbom `npm run cv` (vidi README)
+  cvFile: { hr: "cv.pdf", en: "cv-en.pdf" },
   // Kod iz Google Search Console (Dodaj svojstvo → Prefiks URL-a → HTML oznaka), samo vrijednost content="..."
   googleVerification: "",
   // Slika koja se prikaže kad netko podijeli link (WhatsApp, LinkedIn…), 1200 × 630
@@ -133,7 +134,7 @@ export default {
 
   // Vještine po skupinama, bez ocjena
   skills: [
-    { group: { hr: "Učim i koristim", en: "Learning and using" }, items: ["HTML", "CSS", "JavaScript", "Git i GitHub"] },
+    { group: { hr: "Učim i koristim", en: "Learning and using" }, items: ["HTML", "CSS", "JavaScript", { hr: "Git i GitHub", en: "Git and GitHub" }] },
     { group: { hr: "Sa studija", en: "From university" }, items: [{ hr: "Osnove programiranja", en: "Programming basics" }, { hr: "Baze podataka i SQL", en: "Databases and SQL" }] },
     { group: { hr: "Pouzdano koristim", en: "Confident with" }, items: ["Word, Excel, PowerPoint", { hr: "Evidencija i logistika", en: "Records and logistics" }] }
   ],
@@ -211,8 +212,8 @@ export default {
       year: "2026", status: "done",
       summary: { hr: "Dvojezična stranica sa životopisom i projektima. Ovo što upravo gledaš.", en: "A bilingual site with my CV and projects. The one you're looking at." },
       description: {
-        hr: "Dvojezična stranica sa životopisom i projektima, ovo što upravo gledaš. Statične HR i EN stranice nastaju iz jedne datoteke s podacima, bez frameworka.",
-        en: "A bilingual site with my CV and projects, the one you're looking at. Static Croatian and English pages are built from one data file, without a framework."
+        hr: "Dvojezična stranica sa životopisom i projektima: statične HR i EN stranice iz jedne datoteke s podacima, bez frameworka, prilagođene mobitelu i čitačima ekrana.",
+        en: "A bilingual site with my CV and projects: static Croatian and English pages built from one data file without a framework, made for phones and screen readers."
       },
       shareImage: { src: { hr: "img/share/portfolio-hr.jpg", en: "img/share/portfolio-en.jpg" }, width: 1200, height: 630 },
       problem: { hr: "Trebala mi je stranica koju mogu poslati uz prijavu za posao, umjesto samo PDF-a.", en: "I needed a site I could send with job applications instead of just a PDF." },

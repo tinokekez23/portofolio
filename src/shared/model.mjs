@@ -15,7 +15,7 @@ export function model(ctx) {
     email: P.email,
     phone: P.phone,
     photo: P.photo,
-    cv: P.cvFile,
+    cv: t(P.cvFile),
     socials: P.socials,
     about: P.about.map(t),
     aboutPhoto: P.aboutPhoto ? { src: P.aboutPhoto.src, alt: t(P.aboutPhoto.alt), caption: t(P.aboutPhoto.caption) } : null,

@@ -6,13 +6,14 @@ Statična dvojezična stranica (HR na `/`, EN na `/en/`) koja se generira iz jed
 
 ```
 content/profile.mjs      SAV sadržaj: ime, iskustvo, volontiranje, vještine, projekti… (HR i EN)
-src/site/                izgled stranice (Cetina): home.mjs, project.mjs, layout.mjs, style.css
+src/site/                izgled stranice (Cetina): home.mjs, project.mjs, layout.mjs, style.css; cv.mjs je CV za ispis
 src/shared/              tekstovi sučelja, <head>, obrazac, 404, site.js
 api/contact.js           Vercel funkcija za kontakt obrazac (POST /api/contact)
 lib/contact.mjs          provjera unosa, zaštita od spama, slanje e-pošte (Resend)
 public/                  datoteke koje se kopiraju kakve jesu: cv.pdf, fontovi, slike, igra Arthur
 scripts/build.mjs        generira dist/
 scripts/dev.mjs          lokalni server sa stranicom i API-jem
+scripts/cv.mjs           ispisuje CV u PDF (npm run cv)
 tests/                   testovi za kontakt API i za izgrađenu stranicu (linkovi, alt tekstovi, SEO podaci)
 ```
 
@@ -24,6 +25,7 @@ Stranice: naslovna (`/`, `/en/`), po jedna stranica za svaki projekt (`/projekti
 npm run dev     # izgradi i pokreni na http://localhost:3000
 npm run build   # samo izgradi u dist/
 npm test        # izgradi stranicu i pokreni sve testove
+npm run cv      # napravi public/cv.pdf i public/cv-en.pdf iz content/profile.mjs
 ```
 
 Treba samo Node.js 20 ili noviji, nema `npm install`.
@@ -35,7 +37,7 @@ Uredi `content/profile.mjs`. Polja s `{ hr, en }` imaju obje verzije. Prazno pol
 - **Fotografija:** stavi sliku u `public/img/` i upiši put u `photo` (npr. `"img/tino.webp"`).
 - **GitHub / LinkedIn:** u `socials` (GitHub je upisan, LinkedIn odkomentiraj kad ga imaš). Linkovi se pojavljuju u kontaktu i u podacima za tražilice (`sameAs`).
 - **Novi projekt:** dodaj objekt u `projects`; build mu sam napravi stranicu na `/projekti/<id>/`. Za sliku napravi dvije WebP verzije, `ime-640.webp` i `ime-1200.webp`, i upiši `image.src: "img/ime"`. `description` je opis za tražilice (140 do 160 znakova; bez njega se koristi `summary`), a `shareImage` slika za dijeljenje linka (1200 × 630, u `public/img/share/`; bez nje se koristi tvoja glavna).
-- **CV:** zamijeni `public/cv.pdf`.
+- **CV:** radi se iz istih podataka kao stranica. Nakon izmjene `content/profile.mjs` pokreni `npm run cv`, pa commitaj `public/cv.pdf` (HR) i `public/cv-en.pdf` (EN). Za ispis treba Playwright (`npm i -g playwright`, pa `npx playwright install chromium`); bez njega skripta napravi samo `cv-print/cv-hr.html` i `cv-print/cv-en.html`, koje otvoriš u Chromeu i spremiš kao PDF (Ispis → Spremi kao PDF, A4, uključi pozadinske grafike).
 - **Slika za dijeljenje linka:** `public/img/share/tino-kekez-hr.jpg` i `-en.jpg` (1200 × 630). Ako promijeniš glavnu rečenicu, napravi nove slike s istim tekstom.
 - **Google Search Console:** dodaj svojstvo „Prefiks URL-a” za `https://tinokekez.vercel.app/`, odaberi potvrdu HTML oznakom i upiši samo vrijednost iz `content="..."` u `googleVerification`. Bing Webmaster Tools može svojstvo uvesti izravno iz Search Consolea.
 
