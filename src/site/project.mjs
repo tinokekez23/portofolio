@@ -10,7 +10,7 @@ export function renderProject(ctx, p, next) {
   const path = `projekti/${p.id}/`;
   const url = pageUrl(P, lang, path);
   const title = `${p.title} · ${P.name}`;
-  const description = p.summary;
+  const description = p.description;
   const { person } = entities(ctx);
   const image = p.image ? `${P.siteUrl}/${p.image.src}-1200.webp` : null;
 
@@ -47,18 +47,24 @@ export function renderProject(ctx, p, next) {
 
   return `<!doctype html>
 <html lang="${lang}">
-${head(ctx, { title, description, path, css: ctx.css, jsonld, themeColor: THEME_COLOR, themeColorDark: THEME_COLOR_DARK, fonts: FONTS })}
+${head(ctx, { title, description, path, css: ctx.css, jsonld, themeColor: THEME_COLOR, themeColorDark: THEME_COLOR_DARK, fonts: FONTS, shareImage: p.shareImage, shareAlt: p.title })}
 <body>
 ${header(ctx, { home, path })}
 
 <main id="sadrzaj" class="case wrap">
-  <p class="case-back"><a class="back-link" href="${home}#projekti"><span aria-hidden="true">←</span> ${ui.backToProjects}</a></p>
+  <nav class="crumbs" aria-label="${ui.breadcrumb}">
+    <ol>
+      <li><a href="${home}">${ui.home}</a></li>
+      <li><a href="${home}#projekti">${ui.projects}</a></li>
+      <li aria-current="page">${esc(p.title)}</li>
+    </ol>
+  </nav>
 
   <header class="case-head" id="top">
     <p class="case-kicker">${ui.projectOf} · ${esc(p.year)}</p>
     <h1>${esc(p.title)}</h1>
     <p class="case-lead">${esc(p.summary)}</p>
-    ${p.links.length ? `<p class="case-actions">${p.links.map((l, i) => `<a class="btn${i ? "" : " btn-solid"}" href="${esc(l.url)}">${esc(l.label)}</a>`).join(" ")}</p>` : ""}
+    ${p.links.length ? `<p class="case-actions">${p.links.map((l, i) => `<a class="btn${i ? "" : " btn-solid"}" href="${esc(l.url)}" data-count>${esc(l.label)}</a>`).join(" ")}</p>` : ""}
   </header>
 
   ${media}

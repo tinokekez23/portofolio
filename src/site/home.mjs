@@ -48,7 +48,7 @@ export function renderHome(ctx) {
     <h3><a href="${projectPath(p)}">${esc(p.title)}</a> <span class="proj-year">${esc(p.year)}</span></h3>
     <p>${esc(p.summary)}</p>
     <p class="proj-stack">${p.stack.map(esc).join(", ")}</p>
-    <p class="proj-links"><a class="btn btn-small" href="${projectPath(p)}">${ui.projectDetails}</a>${p.links.map((l) => ` <a class="btn btn-small" href="${esc(l.url)}">${esc(l.label)}</a>`).join("")}</p>
+    <p class="proj-links"><a class="btn btn-small" href="${projectPath(p)}">${ui.projectDetails}</a>${p.links.map((l) => ` <a class="btn btn-small" href="${esc(l.url)}" data-count>${esc(l.label)}</a>`).join("")}</p>
   </div>
 </li>`;
 
@@ -86,7 +86,7 @@ ${header(ctx)}
     <h1 id="hero-h">${esc(m.name)} ${esc(m.headline)}</h1>
     <div class="hero-actions">
       <a class="btn btn-solid" href="#projekti">${ui.seeProjects}</a>
-      <a class="btn" href="/${esc(m.cv)}" download>${ui.downloadCv}</a>
+      <a class="btn" href="/${esc(m.cv)}" download="${esc(m.name.replaceAll(" ", "-"))}-CV${lang === "en" ? "-EN" : ""}.pdf" data-count>${ui.downloadCv}</a>
       ${m.availability ? `<p class="avail"><span class="avail-dot" aria-hidden="true"></span>${esc(m.availability)}</p>` : ""}
     </div>
     </div>

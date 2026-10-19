@@ -185,7 +185,14 @@ a:hover { color: var(--jade); }
 .vol .job-org { margin: .15rem 0 .4rem; }
 
 /* Project page */
-.case-back { padding-top: clamp(1.5rem, 4vw, 2.5rem); }
+.crumbs { padding-top: clamp(1.5rem, 4vw, 2.5rem); }
+.crumbs ol { display: flex; align-items: center; list-style: none; margin: 0; padding: 0; color: var(--muted); font-size: .9375rem; }
+.crumbs li + li::before { content: "/"; margin-inline: .625rem; color: var(--line); }
+.crumbs a { display: inline-flex; align-items: center; min-height: 2.75rem; font-weight: 600; color: var(--ink); text-decoration: none; }
+.crumbs a:hover { color: var(--jade); text-decoration: underline; text-underline-offset: .2em; }
+.crumbs li { flex-shrink: 0; white-space: nowrap; }
+/* The page title is the h1 right below, so on narrow screens it may be cut short. */
+.crumbs [aria-current] { flex-shrink: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; }
 .back-link { display: inline-flex; align-items: center; gap: .5rem; min-height: 2.75rem; font-weight: 600; text-decoration: none; }
 .back-link span { transition: transform .2s; }
 .back-link:hover { color: var(--jade); }
@@ -232,6 +239,7 @@ a:hover { color: var(--jade); }
 @media (prefers-color-scheme: dark) { .cf-send { color: #0B1F1C; } }
 .cf-send:hover { background: var(--ink); color: var(--stone); }
 .cf-send:disabled { opacity: .6; cursor: progress; }
+.cf-note { color: var(--muted); font-size: .9rem; }
 .cf-status:empty { display: none; }
 .cf-status { padding: .9rem 1rem; border-radius: 4px; background: var(--jade-soft); }
 .cf-status[data-kind="err"] { background: color-mix(in srgb, var(--err) 12%, transparent); }
@@ -243,7 +251,7 @@ a:hover { color: var(--jade); }
 .foot-in { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; }
 
 @media print {
-  .bar, .hero-actions, .contact .cf, .foot a, .proj-links, .case-back, .case-next, [data-copy] { display: none !important; }
+  .bar, .hero-actions, .contact .cf, .foot a, .proj-links, .crumbs, .case-next, [data-copy] { display: none !important; }
   body { background: #fff; font-size: 11pt; }
   .sec { break-inside: avoid; padding-block: 1.25rem; }
   .about-photo { display: none; }

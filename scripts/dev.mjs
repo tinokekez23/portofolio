@@ -28,6 +28,11 @@ createServer(async (req, res) => {
       res.writeHead(response.status, Object.fromEntries(response.headers));
       return res.end(Buffer.from(await response.arrayBuffer()));
     }
+    // Vercel adds its analytics script in production; locally an empty one keeps the console clean.
+    if (url.pathname.startsWith("/_vercel/")) {
+      res.writeHead(200, { ...HEADERS, "Content-Type": TYPES[".js"] });
+      return res.end();
+    }
     let file = normalize(join(DIST, decodeURIComponent(url.pathname)));
     if (!file.startsWith(DIST)) { res.writeHead(403); return res.end(); }
     if ((await stat(file).catch(() => null))?.isDirectory()) file = join(file, "index.html");

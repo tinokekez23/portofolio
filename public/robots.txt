@@ -1,4 +1,26 @@
+# Tražilice i AI alati smiju čitati cijelu stranicu, osim /api/.
+
 User-agent: *
+Allow: /
+Disallow: /api/
+
+# AI pretraga i dohvat na zahtjev korisnika (ChatGPT, Claude, Perplexity).
+# Ako ih blokiraš, stranica se ne pojavljuje u njihovim odgovorima.
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+Allow: /
+Disallow: /api/
+
+# Prikupljanje za treniranje AI modela. Nema veze s Google pretragom.
+# Za zabranu promijeni "Allow: /" ispod u "Disallow: /".
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
 Allow: /
 Disallow: /api/
 

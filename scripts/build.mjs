@@ -1,9 +1,10 @@
 // Generates the static site into dist/:
 //   index.html, en/index.html                       home page in HR and EN
 //   projekti/<id>/, en/projekti/<id>/               one page per project
-//   404.html, favicon.svg, site.webmanifest, sitemap.xml
+//   404.html, favicon.svg, site.webmanifest, sitemap.xml, llms.txt
 import { readFile, writeFile, mkdir, cp, rm } from "node:fs/promises";
 import { createHash } from "node:crypto";
+import { execFileSync } from "node:child_process";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import P from "../content/profile.mjs";
@@ -43,6 +44,43 @@ const asset = (name) => {
   return hashed[name];
 };
 
+// Date of the last commit that touched what the pages are built from. Without git
+// history (e.g. a ZIP download) the sitemap leaves <lastmod> out rather than guess.
+function lastChanged() {
+  try {
+    const out = execFileSync("git", ["log", "-1", "--format=%cs", "--", "content", "src", "public"], { cwd: ROOT, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
+    return /^\d{4}-\d{2}-\d{2}$/.test(out.trim()) ? out.trim() : "";
+  } catch {
+    return "";
+  }
+}
+
+// Plain-text summary for AI tools (llmstxt.org). An experiment with no proven effect;
+// everything in it is also in the HTML pages.
+function llmsTxt() {
+  const en = makeT("en");
+  const projects = P.projects.filter((p) => p.status !== "planned");
+  const lines = [
+    `# ${P.name}`,
+    "",
+    `> ${P.name} ${en(P.headline)}`,
+    "",
+    `${en(P.study)}. ${en(P.location)}. ${P.available ? `${en(P.availability)}. ` : ""}Email: ${P.email}`,
+    "",
+    "## Pages",
+    "",
+    `- [Home page in English](${P.siteUrl}/en/): CV, experience, skills, projects and contact`,
+    `- [Home page in Croatian](${P.siteUrl}/): the same content in Croatian`,
+    `- [CV (PDF)](${P.siteUrl}/${en(P.cvFile)})`,
+    "",
+    "## Projects",
+    "",
+    ...projects.map((p) => `- [${en(p.title)}](${P.siteUrl}/en/projekti/${p.id}/): ${en(p.description || p.summary)}`),
+    ...(P.socials.length ? ["", "## Profiles", "", ...P.socials.map((s) => `- [${s.label}](${s.url})`)] : [])
+  ];
+  return lines.join("\n") + "\n";
+}
+
 async function build() {
   await rm(DIST, { recursive: true, force: true });
   await mkdir(join(DIST, "assets"), { recursive: true });
@@ -78,14 +116,16 @@ async function build() {
     icons: [{ src: "/favicon.svg", sizes: "any", type: "image/svg+xml" }]
   }, null, 2));
 
-  const today = new Date().toISOString().slice(0, 10);
+  const lastmod = lastChanged();
   const paths = ["", ...P.projects.filter((p) => p.status !== "planned").map((p) => `projekti/${p.id}/`)];
-  const entry = (loc, path) => `  <url><loc>${loc}</loc><lastmod>${today}</lastmod><xhtml:link rel="alternate" hreflang="hr" href="${P.siteUrl}/${path}"/><xhtml:link rel="alternate" hreflang="en" href="${P.siteUrl}/en/${path}"/></url>`;
+  const alt = (lang, path) => `<xhtml:link rel="alternate" hreflang="${lang}" href="${P.siteUrl}/${lang === "en" ? "en/" : ""}${path}"/>`;
+  const entry = (loc, path) => `  <url><loc>${loc}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ""}${alt("hr", path)}${alt("en", path)}${alt("x-default", path)}</url>`;
   await writeFile(join(DIST, "sitemap.xml"), `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${paths.flatMap((p) => [entry(`${P.siteUrl}/${p}`, p), entry(`${P.siteUrl}/en/${p}`, p)]).join("\n")}
 </urlset>
 `);
+  await writeFile(join(DIST, "llms.txt"), llmsTxt());
   console.log(`Built home and ${paths.length - 1} project pages in HR and EN${contactForm ? "" : " (contact form off: no RESEND_API_KEY)"}`);
 }
 

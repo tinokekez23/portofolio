@@ -30,7 +30,7 @@ export function footer(ctx) {
   const { P, ui } = ctx;
   return `<footer class="foot">
   <div class="wrap foot-in">
-    <p>© ${new Date().getFullYear()} ${esc(P.name)}. ${ui.builtWith}</p>
+    <p>© ${new Date().getFullYear()} ${esc(P.name)}. ${ui.builtWith}${P.analytics ? ` ${ui.privacy}` : ""}</p>
     <a href="#top">${ui.toTop}</a>
   </div>
 </footer>

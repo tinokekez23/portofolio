@@ -47,7 +47,7 @@ test("every local link, image, script and font resolves", async () => {
       if (/^(mailto:|tel:|data:|#|javascript:)/.test(r)) continue;
       if (r.startsWith(P.siteUrl)) r = r.slice(P.siteUrl.length) || "/";
       else if (/^[a-z]+:/i.test(r)) continue;
-      if (r.startsWith("/api/")) continue;
+      if (r.startsWith("/api/") || r.startsWith("/_vercel/")) continue;
       const path = r.split(/[?#]/)[0];
       const target = path.startsWith("/") ? join(DIST, path) : join(dirname(file), path);
       if (!(await exists(target))) broken.push(`${relative(DIST, file)} -> ${r}`);
@@ -63,7 +63,7 @@ test("live pages have language, title, description, canonical and one h1", async
     assert.match(html, new RegExp(`<html lang="${lang}"`), f);
     assert.match(html, /<title>[^<]{10,70}<\/title>/, f);
     const desc = html.match(/<meta name="description" content="([^"]+)"/)?.[1] ?? "";
-    assert.ok(desc.length >= 50 && desc.length <= 160, `${f}: description is ${desc.length} characters`);
+    assert.ok(desc.length >= 120 && desc.length <= 160, `${f}: description is ${desc.length} characters`);
     assert.match(html, new RegExp(`<link rel="canonical" href="${P.siteUrl}/${f.replace("index.html", "")}">`), f);
     assert.equal(html.match(/<h1[\s>]/g)?.length, 1, `${f}: h1 count`);
     assert.doesNotMatch(html, /name="robots" content="noindex"/, f);
@@ -103,6 +103,58 @@ test("sitemap lists only pages that exist", async () => {
   const locs = [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
   assert.ok(locs.length >= 2);
   for (const l of locs) assert.ok(await exists(join(DIST, l.slice(P.siteUrl.length))), l);
+  const urls = xml.match(/<url>.+?<\/url>/g);
+  for (const u of urls) {
+    for (const lang of ["hr", "en", "x-default"]) assert.match(u, new RegExp(`hreflang="${lang}"`), u);
+    const lastmod = u.match(/<lastmod>([^<]+)<\/lastmod>/)?.[1];
+    if (lastmod) assert.ok(lastmod <= new Date().toISOString().slice(0, 10), `lastmod ${lastmod} is in the future`);
+  }
+});
+
+test("project pages show the breadcrumb their structured data describes, and their own share image", async () => {
+  for (const p of P.projects.filter((p) => p.status !== "planned")) {
+    for (const lang of ["hr", "en"]) {
+      const f = `${lang === "en" ? "en/" : ""}projekti/${p.id}/index.html`;
+      const html = await readFile(join(DIST, f), "utf8");
+      const graph = JSON.parse(html.match(/<script type="application\/ld\+json">(.+?)<\/script>/s)[1])["@graph"];
+      const names = graph.find((n) => n["@type"] === "BreadcrumbList").itemListElement.map((i) => i.name);
+      const crumbs = html.match(/<nav class="crumbs"[^>]*>([\s\S]+?)<\/nav>/)?.[1] ?? "";
+      const visible = [...crumbs.matchAll(/<li[^>]*>(?:<a[^>]*>)?([^<]+)/g)].map((m) => m[1].replaceAll("&amp;", "&"));
+      assert.deepEqual(visible, names, f);
+      // A project without its own image falls back to the profile's, which is fine.
+      if (p.shareImage) {
+        const og = html.match(/<meta property="og:image" content="([^"]+)"/)?.[1];
+        assert.equal(og, `${P.siteUrl}/${p.shareImage.src[lang]}`, f);
+      }
+    }
+  }
+});
+
+test("llms.txt links only to pages and files that exist", async () => {
+  const txt = await readFile(join(DIST, "llms.txt"), "utf8");
+  const local = [...txt.matchAll(/\]\((https?:[^)]+)\)/g)].map((m) => m[1]).filter((u) => u.startsWith(P.siteUrl));
+  assert.ok(local.length >= 3);
+  for (const u of local) assert.ok(await exists(join(DIST, u.slice(P.siteUrl.length) || "/")), u);
+});
+
+test("every page loads the analytics script once, after site.js, when analytics is on", async () => {
+  for (const f of [...LIVE, "404.html"]) {
+    const html = await readFile(join(DIST, f), "utf8");
+    const tags = html.match(/<script src="\/_vercel\/insights\/script\.js" defer><\/script>/g) ?? [];
+    assert.equal(tags.length, P.analytics ? 1 : 0, f);
+    const site = html.indexOf('src="/assets/site.');
+    if (P.analytics && site !== -1) assert.ok(site < html.indexOf("/_vercel/insights/"), `${f}: analytics before site.js`);
+  }
+  // The CV can't run the script, so its download link is counted on click
+  for (const f of ["index.html", "en/index.html"]) {
+    assert.match(await readFile(join(DIST, f), "utf8"), /<a [^>]*href="\/cv[^"]*\.pdf"[^>]*data-count/, f);
+  }
+});
+
+test("robots.txt keeps the site open and points to the sitemap", async () => {
+  const txt = await readFile(join(DIST, "robots.txt"), "utf8");
+  assert.doesNotMatch(txt, /^Disallow: \/\s*$/m);
+  assert.match(txt, new RegExp(`^Sitemap: ${P.siteUrl}/sitemap.xml$`, "m"));
 });
 
 test("shipped scripts have no leftover console output", async () => {

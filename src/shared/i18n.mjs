@@ -29,9 +29,9 @@ export default {
     planned: "U izradi",
     projectDetails: "Cijeli opis projekta",
     allProjects: "Svi projekti",
-    backToProjects: "Natrag na projekte",
     builtWithStack: "Tehnologije",
     home: "Naslovna",
+    breadcrumb: "Putanja",
     nextProject: "Sljedeći projekt",
     projectOf: "Projekt",
     testimonials: "Preporuke",
@@ -47,6 +47,7 @@ export default {
     present: "danas",
     available: "Slobodan za rad",
     builtWith: "Izrađeno bez frameworka, objavljeno na Vercelu.",
+    privacy: "Bez kolačića; posjete se broje anonimno.",
     toTop: "Na vrh",
     form: {
       name: "Ime i prezime",
@@ -60,7 +61,8 @@ export default {
       errMessage: "Poruka treba imati barem 10 znakova.",
       errLimit: "Poslao si više poruka u kratkom vremenu. Pokušaj ponovno za desetak minuta.",
       errOffline: "Slanje trenutno ne radi. Pošalji poruku izravno na {email}.",
-      openMail: "Otvori u programu za e-poštu"
+      openMail: "Otvori u programu za e-poštu",
+      privacy: "Ime, e-pošta i poruka stižu mi e-poštom i koristim ih samo za odgovor."
     }
   },
   en: {
@@ -92,9 +94,9 @@ export default {
     planned: "In progress",
     projectDetails: "Full project write-up",
     allProjects: "All projects",
-    backToProjects: "Back to projects",
     builtWithStack: "Built with",
     home: "Home",
+    breadcrumb: "Breadcrumb",
     nextProject: "Next project",
     projectOf: "Project",
     testimonials: "Recommendations",
@@ -110,6 +112,7 @@ export default {
     present: "present",
     available: "Available",
     builtWith: "Built without a framework, hosted on Vercel.",
+    privacy: "No cookies; visits are counted anonymously.",
     toTop: "Back to top",
     form: {
       name: "Full name",
@@ -123,7 +126,8 @@ export default {
       errMessage: "The message needs at least 10 characters.",
       errLimit: "You've sent several messages in a short time. Try again in about ten minutes.",
       errOffline: "Sending isn't working right now. Email me directly at {email}.",
-      openMail: "Open in your email app"
+      openMail: "Open in your email app",
+      privacy: "Your name, email and message reach me by email, and I only use them to reply."
     }
   }
 };

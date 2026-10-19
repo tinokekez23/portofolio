@@ -144,6 +144,17 @@
     });
   });
 
+  /* Visits are counted by Vercel Web Analytics (no cookies) when its script is on the
+     page. A PDF or the game can't run that script, so opening one is counted from its
+     link instead, as a view of that file. */
+  if ($('script[src^="/_vercel/insights/"]')) {
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    document.addEventListener("click", (e) => {
+      const a = e.target.closest("a[data-count]");
+      if (a && a.origin === location.origin) window.va("pageview", { route: a.pathname, path: a.pathname });
+    });
+  }
+
   /* Contact form */
   const form = $("[data-contact]");
   if (!form) return;
