@@ -33,10 +33,11 @@ Treba samo Node.js 20 ili noviji, nema `npm install`.
 Uredi `content/profile.mjs`. Polja s `{ hr, en }` imaju obje verzije. Prazno polje (npr. `phone: ""`) ili prazna lista (npr. `testimonials: []`) sakriva taj dio stranice.
 
 - **Fotografija:** stavi sliku u `public/img/` i upiši put u `photo` (npr. `"img/tino.webp"`).
-- **GitHub / LinkedIn:** odkomentiraj retke u `socials`.
-- **Novi projekt:** dodaj objekt u `projects`; build mu sam napravi stranicu na `/projekti/<id>/`. Za sliku napravi dvije WebP verzije, `ime-640.webp` i `ime-1200.webp`, i upiši `image.src: "img/ime"`.
+- **GitHub / LinkedIn:** u `socials` (GitHub je upisan, LinkedIn odkomentiraj kad ga imaš). Linkovi se pojavljuju u kontaktu i u podacima za tražilice (`sameAs`).
+- **Novi projekt:** dodaj objekt u `projects`; build mu sam napravi stranicu na `/projekti/<id>/`. Za sliku napravi dvije WebP verzije, `ime-640.webp` i `ime-1200.webp`, i upiši `image.src: "img/ime"`. `description` je opis za tražilice (140 do 160 znakova; bez njega se koristi `summary`), a `shareImage` slika za dijeljenje linka (1200 × 630, u `public/img/share/`; bez nje se koristi tvoja glavna).
 - **CV:** zamijeni `public/cv.pdf`.
 - **Slika za dijeljenje linka:** `public/img/share/tino-kekez-hr.jpg` i `-en.jpg` (1200 × 630). Ako promijeniš glavnu rečenicu, napravi nove slike s istim tekstom.
+- **Google Search Console:** dodaj svojstvo „Prefiks URL-a” za `https://tinokekez.vercel.app/`, odaberi potvrdu HTML oznakom i upiši samo vrijednost iz `content="..."` u `googleVerification`. Bing Webmaster Tools može svojstvo uvesti izravno iz Search Consolea.
 
 ## Kontakt obrazac (backend)
 
@@ -54,7 +55,13 @@ Dok ključ nije postavljen, obrazac se uopće ne prikazuje, nego samo adresa e-p
 
 ## Objava
 
-Projekt je spreman za Vercel: `vercel.json` pokreće `npm run build`, objavljuje `dist/`, postavlja sigurnosna zaglavlja (CSP i ostala) i dugo keširanje fontova i skripti (imena skripti u `dist/assets/` sadrže hash sadržaja, pa se nova verzija uvijek učita). Funkcija u `api/` objavljuje se automatski. Build sam napravi i `favicon.svg`, `site.webmanifest`, `sitemap.xml` i `404.html`. Stare adrese `/designs/…` preusmjeravaju na naslovnu.
+Projekt je spreman za Vercel: `vercel.json` pokreće `npm run build`, objavljuje `dist/`, postavlja sigurnosna zaglavlja (CSP i ostala) i dugo keširanje fontova i skripti (imena skripti u `dist/assets/` sadrže hash sadržaja, pa se nova verzija uvijek učita). Funkcija u `api/` objavljuje se automatski. Build sam napravi i `favicon.svg`, `site.webmanifest`, `sitemap.xml`, `llms.txt` i `404.html`.
+
+## Tražilice i AI alati
+
+- `sitemap.xml`: sve stranice s HR, EN i `x-default` alternativama; `lastmod` je datum zadnjeg commita koji je mijenjao sadržaj (bez git povijesti se izostavlja).
+- `public/robots.txt`: sve je dopušteno osim `/api/`. AI botovi su navedeni po imenu u dvije skupine: pretraga i dohvat na zahtjev (ChatGPT, Claude, Perplexity) te prikupljanje za treniranje modela (GPTBot, ClaudeBot, Google-Extended, Applebot-Extended). Za zabranu treniranja promijeni `Allow: /` u `Disallow: /` u drugoj skupini; na Google pretragu to ne utječe.
+- `llms.txt`: kratak sažetak za AI alate, generira se iz `content/profile.mjs`. Eksperiment bez dokazanog učinka. Stare adrese `/designs/…` preusmjeravaju na naslovnu.
 
 GitHub Actions (`.github/workflows/test.yml`) pokreće `npm test` na svakom pull requestu i pushu na `main`.
 

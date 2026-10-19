@@ -17,8 +17,8 @@ export default {
   role: { hr: "Student informatike, front-end web development", en: "Computer science student, front-end web development" },
   // Kratki opis za tražilice i dijeljenje linka
   description: {
-    hr: "Tino Kekez, student treće godine informatike na PMF-u u Splitu. Životopis, iskustvo, vještine i projekti.",
-    en: "Tino Kekez, third-year computer science student in Split, Croatia. CV, experience, skills and projects."
+    hr: "Tino Kekez, student treće godine informatike na PMF-u u Splitu. Izrađujem web stranice u HTML-u, CSS-u i JavaScriptu. Životopis, projekti i kontakt.",
+    en: "Tino Kekez, third-year computer science student in Split, Croatia. I build websites with HTML, CSS and JavaScript. CV, projects and contact details."
   },
   tagline: {
     hr: "Student sam treće godine informatike na PMF-u u Splitu. Izrađujem web stranice u HTML-u, CSS-u i JavaScriptu i tražim studentski posao ili stručnu praksu u IT-u.",
@@ -33,13 +33,15 @@ export default {
   photo: "img/tino.webp", // slika je u public/img, prazno = bez fotografije
   photoSmall: "img/tino-mali.webp", // izrez lica za kružić u zaglavlju
   cvFile: "cv.pdf",
+  // Kod iz Google Search Console (Dodaj svojstvo → Prefiks URL-a → HTML oznaka), samo vrijednost content="..."
+  googleVerification: "",
   // Slika koja se prikaže kad netko podijeli link (WhatsApp, LinkedIn…), 1200 × 630
   shareImage: {
     src: { hr: "img/share/tino-kekez-hr.jpg", en: "img/share/tino-kekez-en.jpg" },
     width: 1200, height: 630
   },
   socials: [
-    // { label: "GitHub", url: "https://github.com/tvoje-ime" },
+    { label: "GitHub", url: "https://github.com/tinokekez23" }
     // { label: "LinkedIn", url: "https://www.linkedin.com/in/tvoje-ime" }
   ],
 
@@ -142,6 +144,8 @@ export default {
   ],
 
   // status: "done" ili "planned"
+  // description: opis za tražilice (140 do 160 znakova); bez njega se koristi summary
+  // shareImage: slika za dijeljenje linka (1200 × 630) u public/img/share/
   projects: [
     {
       id: "arthur",
@@ -151,6 +155,7 @@ export default {
         hr: "2D platformska igra iz kolegija Objektno orijentirano programiranje. Arthur skače po platformama, ruši gobline i traži izlaz kroz dva levela.",
         en: "A 2D platformer from my Object-Oriented Programming course. Arthur jumps across platforms, knocks out goblins and makes his way through two levels."
       },
+      shareImage: { src: { hr: "img/share/arthur-hr.jpg", en: "img/share/arthur-en.jpg" }, width: 1200, height: 630 },
       problem: {
         hr: "Zadatak je bio napraviti igru na gotovom okviru (Otter) i pritom pravilno koristiti klase i nasljeđivanje.",
         en: "The task was to build a game on a provided framework (Otter) and make proper use of classes and inheritance."
@@ -179,6 +184,11 @@ export default {
         hr: "Baza podataka za školski e-dnevnik iz kolegija Baze podataka: učenici, razredi, nastavnici, predmeti, ocjene i izostanci.",
         en: "A database for a school gradebook, from my Databases course: students, classes, teachers, subjects, grades and absences."
       },
+      description: {
+        hr: "Model baze za školski e-dnevnik iz kolegija Baze podataka: sedam tablica za učenike, razrede, nastavnike, predmete, ocjene i izostanke te SQL skripta za Oracle.",
+        en: "Database model for a school gradebook from my Databases course: seven tables for students, classes, teachers, subjects, grades and absences, with an SQL script."
+      },
+      shareImage: { src: { hr: "img/share/ednevnik-hr.jpg", en: "img/share/ednevnik-en.jpg" }, width: 1200, height: 630 },
       problem: {
         hr: "Trebalo je opisati kako škola vodi ocjene i izostanke tako da se isti podatak ne upisuje dvaput i da se u bazu ne može upisati nešto besmisleno.",
         en: "The goal was to model how a school keeps grades and absences so that nothing is stored twice and nothing nonsensical can be entered."
@@ -200,6 +210,11 @@ export default {
       title: { hr: "Osobni portfolio", en: "Personal portfolio" },
       year: "2026", status: "done",
       summary: { hr: "Dvojezična stranica sa životopisom i projektima. Ovo što upravo gledaš.", en: "A bilingual site with my CV and projects. The one you're looking at." },
+      description: {
+        hr: "Dvojezična stranica sa životopisom i projektima, ovo što upravo gledaš. Statične HR i EN stranice nastaju iz jedne datoteke s podacima, bez frameworka.",
+        en: "A bilingual site with my CV and projects, the one you're looking at. Static Croatian and English pages are built from one data file, without a framework."
+      },
+      shareImage: { src: { hr: "img/share/portfolio-hr.jpg", en: "img/share/portfolio-en.jpg" }, width: 1200, height: 630 },
       problem: { hr: "Trebala mi je stranica koju mogu poslati uz prijavu za posao, umjesto samo PDF-a.", en: "I needed a site I could send with job applications instead of just a PDF." },
       solution: { hr: "Prva verzija u čistom HTML-u, CSS-u i JavaScriptu. Druga verzija generira statične HR i EN stranice iz jedne datoteke s podacima i ima kontakt obrazac koji stvarno šalje e-poštu.", en: "The first version was plain HTML, CSS and JavaScript. The second generates static HR and EN pages from one data file and has a contact form that actually sends email." },
       result: { hr: "Brza stranica bez frameworka, prilagođena mobitelu i čitačima ekrana.", en: "A fast, framework-free site that works on phones and with screen readers." },
@@ -215,6 +230,11 @@ export default {
         hr: "Moj prvi rad u HTML-u i CSS-u: dio naslovnice web trgovine po uzoru na eBay, s ponudama, bannerom i podnožjem.",
         en: "My first HTML and CSS project: part of an online shop front page modelled on eBay, with deals, a banner and a footer."
       },
+      description: {
+        hr: "Moj prvi rad u HTML-u i CSS-u: dio naslovnice web trgovine po uzoru na eBay, s ponudama složenima flexboxom, bannerom i podnožjem s četiri stupca.",
+        en: "My first HTML and CSS project: part of an online shop front page modelled on eBay, with deals laid out in flexbox, a banner and a four-column footer."
+      },
+      shareImage: { src: { hr: "img/share/daily-deals-hr.jpg", en: "img/share/daily-deals-en.jpg" }, width: 1200, height: 630 },
       problem: { hr: "Cilj je bio postojeći dizajn što vjernije prenijeti u HTML i CSS.", en: "The goal was to rebuild an existing design in HTML and CSS as closely as possible." },
       solution: { hr: "Proizvode sam složio flexboxom, dodao banner s pozadinskom slikom i gumbom te podnožje s četiri stupca linkova.", en: "I laid out the products with flexbox and added a banner with a background image and button, plus a four-column footer." },
       result: { hr: "Danas bih ga napisao drukčije, ali tu sam počeo i vidi se koliko sam od tada naučio.", en: "I'd write it differently today, but this is where I started, and it shows how much I've learned since." },

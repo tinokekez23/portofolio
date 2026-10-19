@@ -59,6 +59,8 @@ export function model(ctx) {
       year: p.year,
       planned: p.status === "planned",
       summary: t(p.summary),
+      description: t(p.description || p.summary),
+      shareImage: p.shareImage ? { ...p.shareImage, src: t(p.shareImage.src) } : null,
       problem: t(p.problem),
       solution: t(p.solution),
       result: t(p.result),
